@@ -1,9 +1,14 @@
 
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { admin_login } from '../../stores/Reducers/authReducer';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { admin_login, messageClear } from '../../stores/Reducers/authReducer';
+import { ClipLoader } from 'react-spinners'
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 const AdminLogin = () => {
+  const navigation = useNavigate();
   const dispatch = useDispatch();
+  const { loading, errorMessage, successMessage } = useSelector(state => state.auth);
   const [state, setState] = useState({
     email: "",
     password: ""
@@ -20,6 +25,19 @@ const AdminLogin = () => {
     e.preventDefault();
     dispatch(admin_login(state))
   }
+
+  useEffect(() => {
+    if (errorMessage) {
+      toast.error(errorMessage);
+      dispatch(messageClear());
+    }
+
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch(messageClear());
+      navigation('/');
+    }
+  }, [errorMessage, successMessage, dispatch, navigation])
   return (
     <div className='min-w-screen min-h-screen bg-[#cdcae9] flex justify-center items-center'>
       <div className="w-[350px] text-[#ffffff] p-2">
@@ -40,7 +58,9 @@ const AdminLogin = () => {
               <input onChange={inputHandle} value={state.password} className="px-3 py-2 outline-none border border-slate-400 bg-transparent rounded-md" type="password" name="password" id="password" placeholder="Password" required />
             </div>
 
-            <button className="bg-slate-800 w-full hover:shadow-blue-300 hover:shadow-lg text-white rounded-md px-7 py-2 mb-3 cursor-pointer">Sign In</button>
+            <button disabled={loading} className="bg-slate-800 w-full hover:shadow-blue-300 hover:shadow-lg text-white rounded-md px-7 py-2 mb-3 cursor-pointer">
+              {loading ? <ClipLoader color='white' /> : 'Sign In'}
+            </button>
           </form>
         </div>
       </div>
