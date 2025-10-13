@@ -2,11 +2,15 @@
 import { Outlet } from 'react-router-dom';
 import Header from './Header'
 import Sidebar from './Sidebar';
+import { useState } from 'react';
 const MainLayout = () => {
+
+  const [showSidebar, setShowSidebar] = useState(false);
+
   return (
     <div className='bg-[#cdcae9] w-full min-h-screen'>
-      <Header />
-      <Sidebar />
+      <Header showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
+      <Sidebar showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
       <main className='ml-0 lg:ml-[260px] pt-[95px] transition-all'>
         <Outlet />
       </main>
