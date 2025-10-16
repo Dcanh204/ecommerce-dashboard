@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { BsArrowDownSquare } from "react-icons/bs";
 import { Link } from 'react-router-dom';
+import Pagination from '../../components/Pagination';
 const Orders = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState('');
   const [parPage, setParPage] = useState(5);
   const [showOrder, setShowOrder] = useState(null);
-  console.log(searchValue)
   return (
     <div className='px-2 lg:px-7 pt-5'>
       <div className='w-full p-4 rounded-md bg-[#6a5fdf]'>
@@ -96,6 +96,17 @@ const Orders = () => {
             </tbody>
           </table>
         </div>
+
+        <div className='w-full flex justify-end mt-4'>
+          <Pagination
+            pageNumber={currentPage}
+            setPageNumber={setCurrentPage}
+            totalItem={50}
+            parPage={parPage}
+            showItem={3}
+          />
+        </div>
+
       </div>
     </div>
   );
