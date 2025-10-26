@@ -25,22 +25,25 @@ const PaymentRequest = () => {
         <h2 className='text-xl font-medium pb-5 text-[#d0d2d6]'>Yêu cầu rút tiền</h2>
         <div className="w-full">
           <div className="w-full overflow-x-auto">
-            <div className='flex items-center bg-[#a7a3de] uppercase text-sm min-w-[340px] rounded-md font-bold'>
-              <div className='w-[20%] p-2'>STT</div>
-              <div className='w-[20%] p-2'>Số tiền</div>
-              <div className='w-[20%] p-2'>Trạng thái</div>
-              <div className='w-[20%] p-2'>Ngày yêu cầu</div>
-              <div className='w-[20%] p-2'>Hành động</div>
+            <div className='min-w-[700px]'>
+              <div className='flex items-center bg-[#a7a3de] uppercase text-sm min-w-[340px] rounded-md font-bold'>
+                <div className='w-[20%] p-2'>STT</div>
+                <div className='w-[20%] p-2'>Số tiền</div>
+                <div className='w-[20%] p-2'>Trạng thái</div>
+                <div className='w-[20%] p-2'>Ngày yêu cầu</div>
+                <div className='w-[20%] p-2'>Hành động</div>
+              </div>
+              {
+                <List
+                  rowComponent={Row}
+                  rowCount={array.length}
+                  rowHeight={35}
+                  rowProps={{}}
+                  style={{ minWidth: "340px", maxHeight: 350 }}
+                />
+              }
             </div>
-            {
-              <List
-                rowComponent={Row}
-                rowCount={array.length}
-                rowHeight={35}
-                rowProps={{}}
-                style={{ minWidth: "340px", maxHeight: 350 }}
-              />
-            }
+
           </div>
         </div>
       </div>
