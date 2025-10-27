@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BsArrowDownSquare } from "react-icons/bs";
 import { Link } from 'react-router-dom';
 import Pagination from '../../components/Pagination';
+import { FaEye } from "react-icons/fa";
 const Orders = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState('');
@@ -21,25 +22,29 @@ const Orders = () => {
         </div>
 
         <div className='mt-4 overflow-x-auto'>
-          <table className='w-full text-sm text-left text-[#d0d2d6]'>
+          <table className='w-full text-base text-left text-[#d0d2d6]'>
             <thead className='border-b-2 border-slate-700 uppercase font-bold'>
               <tr>
                 <th scope='col' className='px-4 py-2'>Mã đơn hàng</th>
+                <th scope='col' className='px-4 py-2'>Khách hàng</th>
+                <th scope='col' className='px-4 py-2'>Ngày đặt</th>
                 <th scope='col' className='px-4 py-2'>Giá</th>
                 <th scope='col' className='px-4 py-2'>Trạng thái thanh toán</th>
                 <th scope='col' className='px-4 py-2'>Trạng thái đơn hàng</th>
-                <th scope='col' className='px-4 py-2'>Hoạt động</th>
+                <th scope='col' className='px-4 py-2'>Hành động</th>
                 <th scope='col' className='px-4 py-2'><BsArrowDownSquare className='w-[20px] h-[20px]' /></th>
               </tr>
             </thead>
             <tbody>
               <tr className='border-b border-slate-600'>
                 <td className='px-4 py-2 font-medium whitespace-nowrap'>MDH-001</td>
+                <td className='px-4 py-2 font-medium whitespace-nowrap'>Nguyễn Văn A</td>
+                <td className='px-4 py-2 font-medium whitespace-nowrap'>27-09-2025</td>
                 <td className='px-4 py-2 font-medium whitespace-nowrap'>2.000.000đ</td>
                 <td className='px-4 py-2 font-medium whitespace-nowrap'>Chờ xử lý</td>
                 <td className='px-4 py-2 font-medium whitespace-nowrap'>Chờ xử lý</td>
                 <td className='px-4 py-2 lg:px-10 font-medium whitespace-nowrap'>
-                  <Link>Xem</Link>
+                  <Link to='/admin/dashboard/orders/3' className='inline-block p-[6px] bg-green-500 rounded-md hover:shadow-lg hover:bg-green-400/50 '><FaEye /></Link>
                 </td>
                 <td className='px-4 py-2 font-medium whitespace-nowrap'>
                   <BsArrowDownSquare onClick={() => setShowOrder(showOrder === 'MDH-001' ? null : 'MDH-001')} className='w-[20px] h-[20px]
@@ -50,49 +55,22 @@ const Orders = () => {
                 <>
                   <tr className={'border-b border-slate-600 bg-[#8288ed]'}>
                     <td className='pl-6 px-4 py-2 font-medium whitespace-nowrap'>MDH-001</td>
+                    <td className='px-4 py-2 font-medium whitespace-nowrap'>Nguyễn Văn A</td>
+                    <td className='px-4 py-2 font-medium whitespace-nowrap'>27-09-2025</td>
                     <td className='px-4 py-2 font-medium whitespace-nowrap'>2.000.000đ</td>
                     <td className='px-4 py-2 font-medium whitespace-nowrap'>Chờ xử lý</td>
                     <td colSpan={3} className='px-4 py-2 font-medium whitespace-nowrap'>Chờ xử lý</td>
                   </tr>
                   <tr className={'border-b border-slate-600 bg-[#8288ed]'}>
                     <td className='pl-6 px-4 py-2 font-medium whitespace-nowrap'>MDH-001</td>
+                    <td className='px-4 py-2 font-medium whitespace-nowrap'>Nguyễn Văn A</td>
+                    <td className='px-4 py-2 font-medium whitespace-nowrap'>27-09-2025</td>
                     <td className='px-4 py-2 font-medium whitespace-nowrap'>2.000.000đ</td>
                     <td className='px-4 py-2 font-medium whitespace-nowrap'>Chờ xử lý</td>
                     <td colSpan={3} className='px-4 py-2 font-medium whitespace-nowrap'>Chờ xử lý</td>
                   </tr>
                 </>
               }
-              <tr className='border-b border-slate-600'>
-                <td className='px-4 py-2 font-medium whitespace-nowrap'>MDH-002</td>
-                <td className='px-4 py-2 font-medium whitespace-nowrap'>2.000.000đ</td>
-                <td className='px-4 py-2 font-medium whitespace-nowrap'>Chờ xử lý</td>
-                <td className='px-4 py-2 font-medium whitespace-nowrap'>Chờ xử lý</td>
-                <td className='px-4 py-2 lg:px-10 font-medium whitespace-nowrap'>
-                  <Link>Xem</Link>
-                </td>
-                <td className='px-4 py-2 font-medium whitespace-nowrap'>
-                  <BsArrowDownSquare onClick={() => setShowOrder(!showOrder)} className='w-[20px] h-[20px]
-                  cursor-pointer' />
-                </td>
-              </tr>
-              {showOrder === 'MDH-002' &&
-                <>
-                  <tr className={'border-b border-slate-600 bg-[#8288ed]'}>
-                    <td className='pl-6 px-4 py-2 font-medium whitespace-nowrap'>MDH-002</td>
-                    <td className='px-4 py-2 font-medium whitespace-nowrap'>2.000.000đ</td>
-                    <td className='px-4 py-2 font-medium whitespace-nowrap'>Chờ xử lý</td>
-                    <td colSpan={3} className='px-4 py-2 font-medium whitespace-nowrap'>Chờ xử lý</td>
-                  </tr>
-                  <tr className={'border-b border-slate-600 bg-[#8288ed]'}>
-                    <td className='pl-6 px-4 py-2 font-medium whitespace-nowrap'>MDH-002</td>
-                    <td className='px-4 py-2 font-medium whitespace-nowrap'>2.000.000đ</td>
-                    <td className='px-4 py-2 font-medium whitespace-nowrap'>Chờ xử lý</td>
-                    <td colSpan={3} className='px-4 py-2 font-medium whitespace-nowrap'>Chờ xử lý</td>
-                  </tr>
-                </>
-              }
-
-
             </tbody>
           </table>
         </div>
