@@ -1,9 +1,10 @@
 import { AiOutlineDashboard, AiOutlineShoppingCart } from "react-icons/ai";
 import { BiCategory } from "react-icons/bi";
 import { FaUsers, FaUserTimes } from "react-icons/fa";
-import { MdPayment } from "react-icons/md";
+import { MdPayment, MdOutlineDiscount } from "react-icons/md";
 import { FaCodePullRequest } from "react-icons/fa6";
-import { IoIosChatbubbles } from "react-icons/io";
+import { IoIosChatbubbles, IoMdAdd } from "react-icons/io";
+import { LuClipboardList } from "react-icons/lu";
 export const allNav = [
   {
     id: 1,
@@ -60,5 +61,61 @@ export const allNav = [
     icon: <IoIosChatbubbles />,
     role: 'admin',
     path: '/admin/dashboard/chat-seller'
+  },
+  {
+    id: 9,
+    title: 'Dashboard',
+    icon: <IoIosChatbubbles />,
+    role: 'seller',
+    path: '/seller/dashboard'
+  },
+  {
+    id: 10,
+    title: 'Add Product',
+    icon: <IoMdAdd />,
+    role: 'seller',
+    path: '/seller/dashboard/add-product'
+  },
+  {
+    id: 11,
+    title: 'All Product',
+    icon: <LuClipboardList />,
+    role: 'seller',
+    path: '/seller/dashboard/all-product'
+  },
+  {
+    id: 12,
+    title: 'Discount Product',
+    icon: <MdOutlineDiscount />,
+    role: 'seller',
+    path: '/seller/dashboard/discount-product'
+  },
+  {
+    id: 13,
+    title: 'Orders',
+    icon: <AiOutlineShoppingCart />,
+    role: 'seller',
+    path: '/seller/dashboard/orders'
+  },
+  {
+    id: 14,
+    title: 'Payments',
+    icon: <MdPayment />,
+    role: 'seller',
+    path: '/seller/dashboard/payments'
+  },
+  {
+    id: 15,
+    title: 'Chat Customer',
+    icon: <IoIosChatbubbles />,
+    role: 'seller',
+    path: '/seller/dashboard/chat-customer'
+  },
+  {
+    id: 16,
+    title: 'Chat Support',
+    icon: <IoIosChatbubbles />,
+    role: 'seller',
+    path: '/seller/dashboard/chat-support'
   },
 ]
