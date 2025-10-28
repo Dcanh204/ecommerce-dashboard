@@ -5,6 +5,7 @@ import { MdPayment, MdOutlineDiscount } from "react-icons/md";
 import { FaCodePullRequest } from "react-icons/fa6";
 import { IoIosChatbubbles, IoMdAdd } from "react-icons/io";
 import { LuClipboardList } from "react-icons/lu";
+import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 export const allNav = [
   {
     id: 1,
@@ -114,7 +115,7 @@ export const allNav = [
   {
     id: 16,
     title: 'Chat Support',
-    icon: <IoIosChatbubbles />,
+    icon: <IoChatbubbleEllipsesOutline />,
     role: 'seller',
     path: '/seller/dashboard/chat-support'
   },
