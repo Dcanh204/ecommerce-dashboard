@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import { IoMdImages, IoMdCloseCircleOutline } from "react-icons/io";
 const AddProduct = () => {
   const categories = [
     {
@@ -55,7 +55,40 @@ const AddProduct = () => {
       [name]: value
     })
   }
-  console.log(state)
+
+  const [images, setImages] = useState([]);
+  const [imageShow, setImageShow] = useState([])
+
+  const imageHandle = (e) => {
+    const { files } = e.target;
+
+    if (files.length > 0) {
+      setImages([...images, ...files]);
+      let imageUrl = []
+      for (let i = 0; i < files.length; i++) {
+        imageUrl.push({ url: URL.createObjectURL(files[i]) })
+      }
+      setImageShow([...imageShow, ...imageUrl]);
+    }
+  }
+  const changeImage = (img, index) => {
+    if (!img) return;
+    const newImage = [...images];
+    const newImageShow = [...imageShow];
+
+    newImage[index] = img;
+    newImageShow[index] = { url: URL.createObjectURL(img) };
+    setImages(newImage);
+    setImageShow(newImageShow);
+  }
+
+  const removeImage = (i) => {
+    const filterImage = images.filter((_, index) => index !== i);
+    const filterImageShow = imageShow.filter((_, index) => index !== i);
+    setImages(filterImage);
+    setImageShow(filterImageShow);
+  }
+
   return (
     <div className='px-2 lg:px-7 py-5'>
       <div className='w-full p-4 bg-[#6a5fdf] rounded-md'>
@@ -117,15 +150,34 @@ const AddProduct = () => {
               </div>
             </div>
 
-            <div className='flex flex-col w-full gap-1 text-[#d0d2d6]'>
+            <div className='flex flex-col w-full gap-1 text-[#d0d2d6] mb-5'>
               <label htmlFor="description">Mô tả</label>
               <textarea onChange={inputHandle} value={state.description} className='px-3 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="type" name='description' id='description' placeholder='Nhập mô tả' cols={10} rows={4} />
             </div>
 
+            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 sm:gap-4 lg:gap-4 xl:gap-5 gap-3 w-full text-[#d0d2d6]'>
+              {
+                imageShow.map((img, index) => <div key={index} className='h-[190px] relative'>
+                  <label htmlFor={index} className='cursor-pointer'>
+                    <img className='w-full h-full rounded-md' src={img.url} id='index' />
+                  </label>
+                  <input onChange={(e) => changeImage(e.target.files[0], index)} type="file" id={index} className='hidden' />
+                  <span onClick={() => removeImage(index)} className='absolute top-2 right-2 cursor-pointer p-1 z-10 bg-slate-500 rounded-full hover:bg-slate-500/50 hover:shadow-lg text-xl'><IoMdCloseCircleOutline /></span>
+                </div>)
+              }
+              <label htmlFor="image" className='flex flex-col justify-center items-center h-[190px] border border-dashed cursor-pointer hover:border-red-500 w-full text-[#d0d2d6]'>
+                <span><IoMdImages /></span>
+                <span>Chọn ảnh</span>
+              </label>
+              <input onChange={imageHandle} className='hidden' type="file" multiple id='image' />
+            </div>
+            <div>
+              <button className='bg-red-500 shadow-red-500/50 hover:shadow-lg rounded-lg text-white px-7 py-4 my-3'>Thêm sản phẩm</button>
+            </div>
           </form>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
