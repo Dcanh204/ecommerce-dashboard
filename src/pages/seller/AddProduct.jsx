@@ -94,7 +94,7 @@ const AddProduct = () => {
       <div className='w-full p-4 bg-[#6a5fdf] rounded-md'>
         <div className='flex justify-between items-center pb-4'>
           <h2 className='font-semibold text-[#d0d2d6] text-xl'>Thêm sản phẩm</h2>
-          <Link className='bg-blue-500 shadow-blue-500/50 hover:shadow-lg rounded-md text-white px-7 py-2'>Tất cả sản phẩm</Link>
+          <Link to='/seller/dashboard/products' className='bg-blue-500 shadow-blue-500/50 hover:shadow-lg rounded-md text-white px-7 py-2'>Tất cả sản phẩm</Link>
         </div>
 
         <div>
