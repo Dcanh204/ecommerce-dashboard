@@ -6,6 +6,7 @@ import { FaCodePullRequest } from "react-icons/fa6";
 import { IoIosChatbubbles, IoMdAdd } from "react-icons/io";
 import { LuClipboardList } from "react-icons/lu";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
+import { CgProfile } from "react-icons/cg";
 export const allNav = [
   {
     id: 1,
@@ -118,5 +119,12 @@ export const allNav = [
     icon: <IoChatbubbleEllipsesOutline />,
     role: 'seller',
     path: '/seller/dashboard/chat-support'
+  },
+  {
+    id: 17,
+    title: 'Profile',
+    icon: <CgProfile />,
+    role: 'seller',
+    path: '/seller/dashboard/profile'
   },
 ]

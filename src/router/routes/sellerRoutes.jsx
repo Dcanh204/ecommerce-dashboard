@@ -6,6 +6,11 @@ const Product = lazy(() => import('../../pages/seller/Product.jsx'))
 const DiscountProduct = lazy(() => import('../../pages/seller/DiscountProduct.jsx'))
 const Orders = lazy(() => import('../../pages/seller/Orders.jsx'))
 const Payment = lazy(() => import('../../pages/seller/Payment.jsx'))
+const ChatCustomers = lazy(() => import('../../pages/seller/ChatCustomers.jsx'))
+const ChatSupport = lazy(() => import('../../pages/seller/ChatSupport.jsx'))
+const Profile = lazy(() => import('../../pages/seller/Profile.jsx'))
+
+
 export const sellerRoutes = [
   {
     path: '/',
@@ -47,5 +52,23 @@ export const sellerRoutes = [
     element: <Payment />,
     role: 'seller',
     status: 'active'
-  }
+  },
+  {
+    path: '/seller/dashboard/chat-customer',
+    element: <ChatCustomers />,
+    role: 'seller',
+    status: 'active'
+  },
+  {
+    path: '/seller/dashboard/chat-support',
+    element: <ChatSupport />,
+    role: 'seller',
+    ability: ['active', 'deative', 'pending']
+  },
+  {
+    path: '/seller/dashboard/profile',
+    element: <Profile />,
+    role: 'seller',
+    status: 'active'
+  },
 ]
