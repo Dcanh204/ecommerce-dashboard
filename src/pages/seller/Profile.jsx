@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { FaImages } from "react-icons/fa";
 import { FadeLoader } from 'react-spinners'
-import { FaEdit } from "react-icons/fa";
+import { FaEdit, FaEyeSlash, FaEye } from "react-icons/fa";
 const Profile = () => {
   const image = true;
   const loader = true;
   const status = 'd';
+  const [showOldPassword, setShowOldPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [userInfo, setUserInfo] = useState(false)
   return (
     <div className='px-2 lg:px-7 pt-5'>
@@ -114,20 +117,36 @@ const Profile = () => {
                   <label htmlFor="email">Email</label>
                   <input className='px-3 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="email" name='email' id='email' placeholder='Nhập email' />
                 </div>
-                <div className='flex flex-col w-full gap-1 mb-3'>
+                <div className='flex flex-col w-full gap-1 mb-3 relative'>
                   <label htmlFor="oldPassword">Mật khẩu cũ</label>
-                  <input className='px-3 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="password" name='oldPassword' id='oldPassword' placeholder='Nhập mật khẩu cũ' />
+                  <input className='pl-2 pr-14 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type={showOldPassword ? 'text' : 'password'} name='oldPassword' id='oldPassword' placeholder='Nhập mật khẩu cũ' />
+                  {
+                    showOldPassword ? <span onClick={() => setShowOldPassword(!showOldPassword)} className='flex justify-center items-center absolute z-10 top-10 right-5 cursor-pointer'><FaEye /></span>
+                      :
+                      <span onClick={() => setShowOldPassword(!showOldPassword)} className='flex justify-center items-center absolute top-10 right-5 z-10 cursor-pointer'><FaEyeSlash /></span>
+                  }
+
                 </div>
-                <div className='flex flex-col w-full gap-1 mb-3'>
+                <div className='flex flex-col w-full gap-1 mb-3 relative'>
                   <label htmlFor="newPassword">Mật khẩu mới</label>
-                  <input className='px-3 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="password" name='newPassword' id='newPassword' placeholder='Nhập mật khẩu mới' />
+                  <input className='pl-2 pr-14 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type={showNewPassword ? 'text' : 'password'} name='newPassword' id='newPassword' placeholder='Nhập mật khẩu mới' />
+                  {
+                    showNewPassword ? <span onClick={() => setShowNewPassword(!showNewPassword)} className='flex justify-center items-center absolute z-10 top-10 right-5 cursor-pointer'><FaEye /></span>
+                      :
+                      <span onClick={() => setShowNewPassword(!showNewPassword)} className='flex justify-center items-center absolute top-10 right-5 z-10 cursor-pointer'><FaEyeSlash /></span>
+                  }
                 </div>
-                <div className='flex flex-col w-full gap-1 mb-3'>
-                  <label htmlFor="compassNewWord">Nhập lại mật khẩu mới</label>
-                  <input className='px-3 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="password" name='compassNewWord' id='compassNewWord' placeholder='Nhập lại mật khẩu mới' />
+                <div className='flex flex-col w-full gap-1 mb-3 relative'>
+                  <label htmlFor="confirmNewWord">Nhập lại mật khẩu mới</label>
+                  <input className='pl-2 pr-14 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type={showConfirmPassword ? 'text' : 'password'} name='confirmNewWord' id='confirmNewWord' placeholder='Nhập lại mật khẩu mới' />
+                  {
+                    showConfirmPassword ? <span onClick={() => setShowConfirmPassword(!showConfirmPassword)} className='flex justify-center items-center absolute z-10 top-10 right-5 cursor-pointer'><FaEye /></span>
+                      :
+                      <span onClick={() => setShowConfirmPassword(!showConfirmPassword)} className='flex justify-center items-center absolute z-10 top-10 right-5 cursor-pointer'><FaEyeSlash /></span>
+                  }
                 </div>
                 <div>
-                  <button onClick={() => setUserInfo(!userInfo)} className='bg-red-500 shadow-red-500/50 hover:shadow-lg rounded-lg text-white px-7 py-2 '>Cập nhật</button>
+                  <button className='bg-red-500 shadow-red-500/50 hover:shadow-lg rounded-lg text-white px-7 py-2 '>Cập nhật</button>
                 </div>
               </from>
             </div>

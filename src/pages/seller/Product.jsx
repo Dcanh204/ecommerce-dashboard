@@ -42,7 +42,7 @@ const Product = () => {
                   <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>10%</td>
                   <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>36</td>
                   <td scope='row' className='py-3 px-4 lg:px-8 font-medium whitespace-nowrap'>
-                    <Link className='inline-block justify-start  items-center mr-4 p-[6px] bg-yellow-500 rounded-md hover:shadow-lg hover:bg-yellow-500/50 '><FaEdit /></Link>
+                    <Link to={`/seller/dashboard/products/edit/2`} className='inline-block justify-start  items-center mr-4 p-[6px] bg-yellow-500 rounded-md hover:shadow-lg hover:bg-yellow-500/50 '><FaEdit /></Link>
                     <Link className='inline-block justify-start  items-center mr-4 p-[6px] bg-green-500 rounded-md hover:shadow-lg hover:bg-green-500/50 '><FaEye /></Link>
                     <Link className='inline-block justify-start  items-center p-[6px] bg-red-500 rounded-md hover:shadow-lg hover:bg-red-500/50 '><FaTrash /></Link>
                   </td>
