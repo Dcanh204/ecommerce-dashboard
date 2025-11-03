@@ -36,7 +36,7 @@ const Orders = () => {
                   <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>Chưa thanh toán</td>
                   <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>Chờ xử lý</td>
                   <td scope='row' className='py-3 px-4 lg:px-8 font-medium whitespace-nowrap'>
-                    <Link className='inline-block justify-start  items-center mr-4 p-[6px] bg-green-500 rounded-md hover:shadow-lg hover:bg-green-500/50 '><FaEye /></Link>
+                    <Link to={`/seller/dashboard/orders/3`} className='inline-block justify-start  items-center mr-4 p-[6px] bg-green-500 rounded-md hover:shadow-lg hover:bg-green-500/50 '><FaEye /></Link>
                   </td>
                 </tr>
               )}
