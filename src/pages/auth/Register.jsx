@@ -1,8 +1,15 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FaFacebook, FaGoogle } from "react-icons/fa";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { messageClear, seller_register } from '../../stores/Reducers/authReducer';
+import { ClipLoader } from 'react-spinners';
+import toast from 'react-hot-toast';
 const Register = () => {
 
+  const { loading, errorMessage, successMessage } = useSelector(state => state.auth);
+  const dispatch = useDispatch();
+  const navigation = useNavigate()
   const [state, setState] = useState({
     name: "",
     email: "",
@@ -19,8 +26,20 @@ const Register = () => {
 
   const submitHandle = (e) => {
     e.preventDefault();
-    console.log(state);
+    dispatch(seller_register(state));
   }
+
+  useEffect(() => {
+    if (errorMessage) {
+      toast.error(errorMessage);
+      dispatch(messageClear())
+    }
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch(messageClear());
+      navigation("/");
+    }
+  }, [errorMessage, successMessage, dispatch, navigation])
 
   return (
     <div className='min-w-screen min-h-screen bg-[#cdcae9] flex justify-center items-center'>
@@ -49,7 +68,11 @@ const Register = () => {
               <label htmlFor="checkbox">I agree to privacy policy & treams</label>
             </div>
 
-            <button className="bg-slate-800 w-full hover:shadow-blue-300 hover:shadow-lg text-white rounded-md px-7 py-2 mb-3 cursor-pointer">Sign Up</button>
+            <button disabled={loading} className="bg-slate-800 w-full hover:shadow-blue-300 hover:shadow-lg text-white rounded-md px-7 py-2 mb-3 cursor-pointer">
+              {
+                loading ? <ClipLoader color='white' /> : 'Sing Up'
+              }
+            </button>
             <div className="flex justify-center items-center mb-3 gap-3">
               <p>
                 Already Have an account ? <Link className="font-bold" to="/login">Sing In</Link>
