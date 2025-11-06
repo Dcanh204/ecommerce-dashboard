@@ -3,6 +3,8 @@ const Login = lazy(() => import('../../pages/auth/Login'));
 const Register = lazy(() => import('../../pages/auth/Register'));
 const AdminLogin = lazy(() => import('../../pages/auth/AdminLogin'))
 const Home = lazy(() => import('../../pages/Home.jsx'))
+const UnAuthorize = lazy(() => import('../../pages/UnAuthorize.jsx'))
+
 const publicRoutes = [
   {
     path: '/',
@@ -19,7 +21,12 @@ const publicRoutes = [
   {
     path: '/admin/login',
     element: <AdminLogin />
-  }
+  },
+  {
+    path: '/unauthorized',
+    element: <UnAuthorize />
+  },
+
 ]
 
 export default publicRoutes
