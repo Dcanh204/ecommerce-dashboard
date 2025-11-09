@@ -27,6 +27,6 @@ const ProtectRoutes = ({ children, route }) => {
       return <Navigate to='/seller/account-deactive' replace />
     }
   }
-  return <Navigate to='/unauthorized' replace />
+  return <Navigate to='/unauthorized' />
 };
 export default ProtectRoutes;
