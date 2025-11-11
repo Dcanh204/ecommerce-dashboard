@@ -1,30 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IoMdImages, IoMdCloseCircleOutline } from "react-icons/io";
+import { useDispatch, useSelector } from 'react-redux';
+import { getCategory } from '../../stores/Reducers/categoryReducer';
+import { addProduct, messageClear } from '../../stores/Reducers/productReducer';
+import { ClipLoader } from 'react-spinners';
+import toast from 'react-hot-toast';
 const AddProduct = () => {
-  const categories = [
-    {
-      id: 1,
-      name: "Điện thoại"
-    },
-    {
-      id: 2,
-      name: "Máy tính"
-    },
-    {
-      id: 3,
-      name: 'Đồng hồ'
-    },
-    {
-      id: 4,
-      name: 'Tivi'
-    },
+  const dispatch = useDispatch();
+  const { categories } = useSelector(state => state.category);
+  const { loading, successMessage, errorMessage } = useSelector(state => state.product);
 
-  ]
+  // gửi dispatch yêu cầu lấy danh sách
+  useEffect(() => {
+    dispatch(getCategory({ parPage: '', page: '', searchValue: '' }));
+  }, [dispatch]);
+
+
   const [cateShow, setCateShow] = useState(false);
   const [category, setCategory] = useState('');
   const [searchValue, setSearchValue] = useState('');
-  const [allCategory, setAllCategory] = useState(categories);
+  const [allCategory, setAllCategory] = useState([]);
+  const [images, setImages] = useState([]);
+  const [imageShow, setImageShow] = useState([])
   const [state, setState] = useState({
     name: "",
     brand: "",
@@ -33,6 +31,33 @@ const AddProduct = () => {
     description: "",
     stock: ""
   })
+
+  // set danh sách danh mục
+  useEffect(() => {
+    setAllCategory(categories);
+  }, [categories]);
+  //lấy thông báo
+  useEffect(() => {
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch(messageClear());
+      setState({
+        name: "",
+        brand: "",
+        price: "",
+        discount: "",
+        description: "",
+        stock: ""
+      })
+      setCategory('');
+      setImageShow([])
+      setImages([])
+    }
+    if (errorMessage) {
+      toast.error(errorMessage);
+      dispatch(messageClear());
+    }
+  }, [errorMessage, successMessage, dispatch])
   // lọc bỏ dấu 
   const removeAccents = (str) => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   const categorySearch = (e) => {
@@ -40,7 +65,7 @@ const AddProduct = () => {
     setSearchValue(value);
     if (value) {
       const srcValue = categories.filter(c =>
-        removeAccents(c.name.toLowerCase()).includes(removeAccents(value.toLowerCase()))
+        removeAccents(c.category_name.toLowerCase()).includes(removeAccents(value.toLowerCase()))
       );
       setAllCategory(srcValue)
     } else {
@@ -55,9 +80,6 @@ const AddProduct = () => {
       [name]: value
     })
   }
-
-  const [images, setImages] = useState([]);
-  const [imageShow, setImageShow] = useState([])
 
   const imageHandle = (e) => {
     const { files } = e.target;
@@ -89,6 +111,25 @@ const AddProduct = () => {
     setImageShow(filterImageShow);
   }
 
+  // gửi dữ liệu đến reducer
+  const add_product = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('name', state.name);
+    formData.append('brand', state.brand);
+    formData.append('price', state.price);
+    formData.append('discount', state.discount);
+    formData.append('description', state.description);
+    formData.append('stock', state.stock);
+    formData.append('category', category);
+    formData.append('shopName', "TheGioiDiDong");
+
+    images.forEach(item => {
+      formData.append('images', item);
+    });
+    dispatch(addProduct(formData))
+  }
+
   return (
     <div className='px-2 lg:px-7 py-5'>
       <div className='w-full p-4 bg-[#6a5fdf] rounded-md'>
@@ -98,7 +139,7 @@ const AddProduct = () => {
         </div>
 
         <div>
-          <form>
+          <form onSubmit={add_product}>
             <div className='w-full flex flex-col md:flex-row gap-4 text-[#d0d2d6] mb-3'>
               <div className='flex flex-col w-full gap-1'>
                 <label htmlFor="name">Tên sản phẩm</label>
@@ -114,19 +155,19 @@ const AddProduct = () => {
               <div className='flex flex-col w-full gap-1 relative'>
                 <label htmlFor="category">Danh mục</label>
                 <input onClick={() => setCateShow(!cateShow)} value={category} readOnly className='px-3 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="text" name='category' id='category' placeholder='-- Chọn danh mục --' />
-                <div className={`absolute z-20 top-[101%] w-full bg-[#475569] transition-all ${cateShow ? 'scale-100' : 'scale-0'} duration-300 over`}>
+                <div className={`absolute z-20 top-[101%] w-full bg-[#475569] transition-all ${cateShow ? 'scale-100' : 'scale-0'} duration-300`}>
                   <div className='w-full px-4 py-2'>
-                    <input onChange={categorySearch} className='w-full px-3 py-1 focus:border-indigo-500 outline-none bg-transparent  border border-slate-700 rounded-md text-[#d0d2d6]' type="text" placeholder='Tìm kiếm' />
+                    <input onChange={categorySearch} className='w-full px-3 py-1 focus:border-indigo-500 outline-none bg-transparent  border border-slate-700 rounded-md text-[#d0d2d6]' type="text" placeholder='Tìm kiếm' value={searchValue} />
                   </div>
                   <div className='flex flex-col justify-start items-start h-[170px] overflow-y-auto'>
                     {
-                      allCategory.map((item, index) => <span className={`px-4 py-2 hover:bg-indigo-500 hover:text-white w-full cursor-pointer`} onClick={() => {
+                      allCategory.map((item, index) => <span key={index} className={`px-4 py-2 hover:bg-indigo-500 hover:text-white w-full cursor-pointer`} onClick={() => {
                         setCateShow(false)
-                        setCategory(item.name)
+                        setCategory(item.category_name)
                         setSearchValue('')
                         setAllCategory(categories)
                       }}>
-                        {item.name}
+                        {item.category_name}
                       </span>)
                     }
                   </div>
@@ -135,18 +176,18 @@ const AddProduct = () => {
               </div>
               <div className='flex flex-col w-full gap-1'>
                 <label htmlFor="stock">Số lượng sản phẩm</label>
-                <input onChange={inputHandle} value={state.stock} className='px-3 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="text" name='stock' id='stock' placeholder='Nhập số lượng sản phẩm' />
+                <input min={0} onChange={inputHandle} value={state.stock} className='px-3 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="text" name='stock' id='stock' placeholder='Nhập số lượng sản phẩm' />
               </div>
             </div>
 
             <div className='w-full flex flex-col md:flex-row gap-4 text-[#d0d2d6] mb-3'>
               <div className='flex flex-col w-full gap-1'>
                 <label htmlFor="price">Giá</label>
-                <input onChange={inputHandle} value={state.price} className='px-3 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="number" name='price' id='price' placeholder='Nhập giá sản phẩm' />
+                <input min={0} onChange={inputHandle} value={state.price} className='px-3 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="number" name='price' id='price' placeholder='Nhập giá sản phẩm' />
               </div>
               <div className='flex flex-col w-full gap-1'>
                 <label htmlFor="discount">Giảm giá</label>
-                <input onChange={inputHandle} value={state.discount} className='px-3 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="number" name='discount' id='discount' placeholder='% Nhập phần trăm giảm giá' />
+                <input min={0} onChange={inputHandle} value={state.discount} className='px-3 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="number" name='discount' id='discount' placeholder='% Nhập phần trăm giảm giá' />
               </div>
             </div>
 
@@ -171,8 +212,12 @@ const AddProduct = () => {
               </label>
               <input onChange={imageHandle} className='hidden' type="file" multiple id='image' />
             </div>
-            <div>
-              <button className='bg-red-500 shadow-red-500/50 hover:shadow-lg rounded-lg text-white px-7 py-4 my-3'>Thêm sản phẩm</button>
+            <div className='flex justify-center md:justify-start '>
+              <button disabled={loading} className='bg-red-500 shadow-red-500/50 hover:shadow-lg rounded-lg text-white px-7 py-3 my-3 w-[200px] '>
+                {
+                  loading ? <ClipLoader color='white' size={25} /> : 'Thêm sản phẩm'
+                }
+              </button>
             </div>
           </form>
         </div>

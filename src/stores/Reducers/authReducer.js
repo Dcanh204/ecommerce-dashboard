@@ -139,7 +139,7 @@ const authReducer = createSlice({
       })
       .addCase(get_me.rejected, (state, action) => {
         state.loading = false;
-        state.errorMessage = action.payload.message;
+        state.errorMessage = action.payload?.message;
       })
 
   }
