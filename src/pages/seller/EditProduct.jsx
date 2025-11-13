@@ -1,26 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { IoMdImages, IoMdCloseCircleOutline } from "react-icons/io";
+import { Link, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCategory } from '../../stores/Reducers/categoryReducer';
+import { getProductById, messageClear, updateImage, updateProduct } from '../../stores/Reducers/productReducer';
+import { ClipLoader } from 'react-spinners';
+import toast from 'react-hot-toast';
 const EditProduct = () => {
-  const categories = [
-    {
-      id: 1,
-      name: "Điện thoại"
-    },
-    {
-      id: 2,
-      name: "Máy tính"
-    },
-    {
-      id: 3,
-      name: 'Đồng hồ'
-    },
-    {
-      id: 4,
-      name: 'Tivi'
-    },
 
-  ]
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const { categories } = useSelector(state => state.category);
+  const { product, loading, successMessage, errorMessage } = useSelector(state => state.product);
+
   const [cateShow, setCateShow] = useState(false);
   const [category, setCategory] = useState('');
   const [searchValue, setSearchValue] = useState('');
@@ -34,20 +25,41 @@ const EditProduct = () => {
     stock: ""
   })
 
+  // gửi dữ liệu để danh sách danh mục
   useEffect(() => {
-    setState({
-      name: "IPhone 17 Promax",
-      brand: "Apple",
-      price: 44000000,
-      discount: "10",
-      description: "Điện thoại iphone 17 ra mắt tháng 9 năm 2025 được cải tiến hiệu năng về camera sắc nét, với bộ 3 mắt",
-      stock: "3"
-    })
-    setCategory("Điện thoại")
-    setImageShow(
-      ['http://localhost:4000/images/category/2.jpg']
-    )
-  }, []);
+    dispatch(getCategory({
+      searchValue: '',
+      page: '',
+      parPage: ''
+    }))
+  }, [searchValue, dispatch])
+  // đổ vào danh mục
+  useEffect(() => {
+    setAllCategory(categories);
+  }, [categories])
+
+  useEffect(() => {
+    dispatch(getProductById(id))
+  }, [dispatch, id]);
+
+  useEffect(() => {
+    if (product && Object.keys(product).length > 0) {
+      setState({
+        name: product.name,
+        brand: product.brand,
+        price: product.price,
+        discount: product.discount,
+        description: product.description,
+        stock: product.stock
+      })
+      setCategory(product.category)
+      setImageShow(
+        product.images
+      )
+    }
+
+
+  }, [product]);
   // lọc bỏ dấu 
   const removeAccents = (str) => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   const categorySearch = (e) => {
@@ -71,38 +83,45 @@ const EditProduct = () => {
     })
   }
 
-  const [images, setImages] = useState([]);
   const [imageShow, setImageShow] = useState([])
 
-  const imageHandle = (e) => {
-    const { files } = e.target;
 
-    if (files.length > 0) {
-      setImages([...images, ...files]);
-      let imageUrl = []
-      for (let i = 0; i < files.length; i++) {
-        imageUrl.push(URL.createObjectURL(files[i]))
-      }
-      setImageShow([...imageShow, ...imageUrl]);
+  const changeImage = (img, files) => {
+    if (files.length <= 0) return;
+    const formData = new FormData();
+    formData.append('oldImage', img);
+    formData.append('newImage', files[0]);
+    dispatch(updateImage({ id, formData }))
+  }
+
+  // update
+  const update_product = (e) => {
+    e.preventDefault();
+    const obj = {
+      name: state.name,
+      brand: state.brand,
+      price: state.price,
+      discount: state.discount || 0,
+      description: state.description,
+      stock: state.stock,
+      category: category,
+      id
     }
-  }
-  const changeImage = (img, index) => {
-    if (!img) return;
-    const newImage = [...images];
-    const newImageShow = [...imageShow];
-
-    newImage[index] = img;
-    newImageShow[index] = URL.createObjectURL(img);
-    setImages(newImage);
-    setImageShow(newImageShow);
+    dispatch(updateProduct(obj))
   }
 
-  const removeImage = (i) => {
-    const filterImage = images.filter((_, index) => index !== i);
-    const filterImageShow = imageShow.filter((_, index) => index !== i);
-    setImages(filterImage);
-    setImageShow(filterImageShow);
-  }
+  useEffect(() => {
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch(messageClear())
+    }
+    if (errorMessage) {
+      toast.error(errorMessage);
+      dispatch(messageClear())
+    }
+  }, [successMessage, errorMessage, dispatch])
+
+
 
   return (
     <div className='px-2 lg:px-7 py-5'>
@@ -113,7 +132,7 @@ const EditProduct = () => {
         </div>
 
         <div>
-          <form>
+          <form onSubmit={update_product}>
             <div className='w-full flex flex-col md:flex-row gap-4 text-[#d0d2d6] mb-3'>
               <div className='flex flex-col w-full gap-1'>
                 <label htmlFor="name">Tên sản phẩm</label>
@@ -135,13 +154,13 @@ const EditProduct = () => {
                   </div>
                   <div className='flex flex-col justify-start items-start h-[170px] overflow-y-auto'>
                     {
-                      allCategory.map((item, index) => <span className={`px-4 py-2 hover:bg-indigo-500 hover:text-white w-full cursor-pointer`} onClick={() => {
+                      allCategory.map((item, index) => <span key={index} className={`px-4 py-2 hover:bg-indigo-500 hover:text-white w-full cursor-pointer`} onClick={() => {
                         setCateShow(false)
-                        setCategory(item.name)
+                        setCategory(item.category_name)
                         setSearchValue('')
                         setAllCategory(categories)
                       }}>
-                        {item.name}
+                        {item.category_name}
                       </span>)
                     }
                   </div>
@@ -170,24 +189,22 @@ const EditProduct = () => {
               <textarea onChange={inputHandle} value={state.description} className='px-3 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="type" name='description' id='description' placeholder='Nhập mô tả' cols={10} rows={4} />
             </div>
 
-            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 sm:gap-4 lg:gap-4 xl:gap-5 gap-3 w-full text-[#d0d2d6]'>
+            <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 sm:gap-4 lg:gap-4 xl:gap-5 gap-3 w-full text-[#d0d2d6]'>
               {
                 imageShow.map((img, index) => <div key={index} className='h-[190px] relative'>
                   <label htmlFor={index} className='cursor-pointer'>
                     <img className='w-full h-full rounded-md' src={img} id='index' />
                   </label>
-                  <input onChange={(e) => changeImage(e.target.files[0], index)} type="file" id={index} className='hidden' />
-                  <span onClick={() => removeImage(index)} className='absolute top-2 right-2 cursor-pointer p-1 z-10 bg-slate-500 rounded-full hover:bg-slate-500/50 hover:shadow-lg text-xl'><IoMdCloseCircleOutline /></span>
+                  <input onChange={(e) => changeImage(img, e.target.files)} type="file" id={index} className='hidden' />
                 </div>)
               }
-              <label htmlFor="image" className='flex flex-col justify-center items-center h-[190px] border border-dashed cursor-pointer hover:border-red-500 w-full text-[#d0d2d6]'>
-                <span><IoMdImages /></span>
-                <span>Chọn ảnh</span>
-              </label>
-              <input onChange={imageHandle} className='hidden' type="file" multiple id='image' />
             </div>
-            <div>
-              <button className='bg-red-500 shadow-red-500/50 hover:shadow-lg rounded-lg text-white px-7 py-3 my-3'>Cập nhật</button>
+            <div className='flex justify-center md:justify-start'>
+              <button disabled={loading} className='bg-red-500 shadow-red-500/50 hover:shadow-lg rounded-lg text-white px-7 py-3 my-3 cursor-pointer w-[200px]'>
+                {
+                  loading ? <ClipLoader color='white' /> : 'Cập nhật'
+                }
+              </button>
             </div>
           </form>
         </div>

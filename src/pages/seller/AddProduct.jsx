@@ -91,6 +91,7 @@ const AddProduct = () => {
         imageUrl.push({ url: URL.createObjectURL(files[i]) })
       }
       setImageShow([...imageShow, ...imageUrl]);
+      e.target.value = null;
     }
   }
   const changeImage = (img, index) => {
