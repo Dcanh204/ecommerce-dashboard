@@ -74,7 +74,6 @@ const categoryReducer = createSlice({
       .addCase(addCategory.fulfilled, (state, action) => {
         state.loading = false;
         state.successMessage = action.payload.message;
-        state.categories = [...state.categories, action.payload.category]
       })
       .addCase(addCategory.rejected, (state, action) => {
         state.loading = false;
