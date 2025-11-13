@@ -69,12 +69,26 @@ const returnRole = (token) => {
 
 }
 
+export const profile_image_upload = createAsyncThunk(
+  'auth/profile_image_upload',
+  async (formData, { rejectWithValue }) => {
+    try {
+      const { data } = await api.post('/auth/profile-image-upload', formData, { withCredentials: true });
+      console.log(data)
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+)
+
 const authReducer = createSlice({
   name: 'auth',
   initialState: {
     successMessage: '',
     errorMessage: '',
     loading: false,
+    loadingProfile: false,
     userInfo: '',
     role: returnRole(localStorage.getItem('accessToken')),
     token: localStorage.getItem('accessToken')
@@ -139,6 +153,19 @@ const authReducer = createSlice({
       })
       .addCase(get_me.rejected, (state, action) => {
         state.loading = false;
+        state.errorMessage = action.payload?.message;
+      })
+
+      .addCase(profile_image_upload.pending, (state) => {
+        state.loadingProfile = true;
+      })
+      .addCase(profile_image_upload.fulfilled, (state, action) => {
+        state.loadingProfile = false;
+        state.successMessage = action.payload?.message;
+        state.userInfo = action.payload?.userInfo;
+      })
+      .addCase(profile_image_upload.rejected, (state, action) => {
+        state.loadingProfile = false;
         state.errorMessage = action.payload?.message;
       })
 
