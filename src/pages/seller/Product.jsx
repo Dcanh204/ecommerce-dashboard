@@ -5,7 +5,8 @@ import Pagination from '../../components/Pagination';
 import { Link } from 'react-router-dom';
 import { FaEdit, FaTrash, FaEye } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
-import { getProduct } from '../../stores/Reducers/productReducer';
+import { deleteProduct, getProduct, messageClear } from '../../stores/Reducers/productReducer';
+import toast from 'react-hot-toast';
 const Product = () => {
 
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const Product = () => {
   const [searchValue, setSearchValue] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState(searchValue);
   const [parPage, setParPage] = useState(5);
-
+  const { successMessage, errorMessage } = useSelector(state => state.product);
 
   // trách gửi quá nhiều request tìm kiếm
   useEffect(() => {
@@ -32,10 +33,28 @@ const Product = () => {
     }
     dispatch(getProduct(obj))
   }, [debouncedSearch, parPage, currentPage, dispatch])
-
-
-
-
+  //
+  useEffect(() => {
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch(messageClear());
+    }
+    if (errorMessage) {
+      toast.error(errorMessage);
+      dispatch(messageClear());
+    }
+  }, [successMessage, errorMessage, dispatch])
+  const handlerDelete = async (id) => {
+    if (window.confirm("Bạn có chắc muốn xóa sản phẩm này không?")) {
+      await dispatch(deleteProduct(id)).unwrap();
+      const obj = {
+        parPage,
+        page: currentPage,
+        searchValue: debouncedSearch
+      }
+      dispatch(getProduct(obj))
+    }
+  }
   return (
     <div className='px-2 lg:px-7 pt-5'>
       <h1 className='text-[#000000] font-semibold text-xl mb-3'>Tất cả sản phẩm</h1>
@@ -74,7 +93,7 @@ const Product = () => {
                   <td scope='row' className='py-3 px-4 lg:px-8 font-medium whitespace-nowrap'>
                     <Link to={`/seller/dashboard/products/edit/${item._id}`} className='inline-block justify-start  items-center mr-4 p-[6px] bg-yellow-500 rounded-md hover:shadow-lg hover:bg-yellow-500/50 '><FaEdit /></Link>
                     <Link className='inline-block justify-start  items-center mr-4 p-[6px] bg-green-500 rounded-md hover:shadow-lg hover:bg-green-500/50 '><FaEye /></Link>
-                    <Link className='inline-block justify-start  items-center p-[6px] bg-red-500 rounded-md hover:shadow-lg hover:bg-red-500/50 '><FaTrash /></Link>
+                    <Link onClick={() => handlerDelete(item._id)} className='inline-block justify-start  items-center p-[6px] bg-red-500 rounded-md hover:shadow-lg hover:bg-red-500/50 '><FaTrash /></Link>
                   </td>
                 </tr>
               )}
