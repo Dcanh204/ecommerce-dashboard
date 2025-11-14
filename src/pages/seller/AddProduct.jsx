@@ -10,6 +10,7 @@ const AddProduct = () => {
   const dispatch = useDispatch();
   const { categories } = useSelector(state => state.category);
   const { loading, successMessage, errorMessage } = useSelector(state => state.product);
+  const { userInfo } = useSelector(state => state.auth);
 
   // gửi dispatch yêu cầu lấy danh sách
   useEffect(() => {
@@ -123,7 +124,7 @@ const AddProduct = () => {
     formData.append('description', state.description);
     formData.append('stock', state.stock);
     formData.append('category', category);
-    formData.append('shopName', "TheGioiDiDong");
+    formData.append('shopName', userInfo?.shopInfo?.shopName);
 
     images.forEach(item => {
       formData.append('images', item);

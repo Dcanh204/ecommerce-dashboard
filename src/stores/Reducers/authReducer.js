@@ -82,6 +82,19 @@ export const profile_image_upload = createAsyncThunk(
   }
 )
 
+export const profile_info_add = createAsyncThunk(
+  'auth/profile_info_add',
+  async (shopInfo, { rejectWithValue }) => {
+    try {
+      const { data } = await api.post('/auth/profile-info-add', shopInfo, { withCredentials: true });
+      console.log(data)
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+)
+
 const authReducer = createSlice({
   name: 'auth',
   initialState: {
@@ -165,6 +178,19 @@ const authReducer = createSlice({
         state.userInfo = action.payload?.userInfo;
       })
       .addCase(profile_image_upload.rejected, (state, action) => {
+        state.loadingProfile = false;
+        state.errorMessage = action.payload?.message;
+      })
+
+      .addCase(profile_info_add.pending, (state) => {
+        state.loadingProfile = true;
+      })
+      .addCase(profile_info_add.fulfilled, (state, action) => {
+        state.loadingProfile = false;
+        state.successMessage = action.payload?.message;
+        state.userInfo = action.payload?.userInfo;
+      })
+      .addCase(profile_info_add.rejected, (state, action) => {
         state.loadingProfile = false;
         state.errorMessage = action.payload?.message;
       })

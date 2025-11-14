@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { FaImages } from "react-icons/fa";
-import { FadeLoader } from 'react-spinners'
+import { ClipLoader, FadeLoader } from 'react-spinners'
 import { FaEdit, FaEyeSlash, FaEye } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
-import { messageClear, profile_image_upload } from '../../stores/Reducers/authReducer';
+import { messageClear, profile_image_upload, profile_info_add } from '../../stores/Reducers/authReducer';
 import toast from 'react-hot-toast';
 const Profile = () => {
   const dispatch = useDispatch();
   const { userInfo, loadingProfile, successMessage, errorMessage } = useSelector(state => state.auth);
+  const [show, setShow] = useState(false);
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [state, setState] = useState({
+    shopName: '',
+    city: '',
+    address: ''
+  })
 
   useEffect(() => {
     if (successMessage) {
@@ -23,6 +29,13 @@ const Profile = () => {
     }
   }, [successMessage, errorMessage, dispatch]);
 
+  const inputHandle = (e) => {
+    const { name, value } = e.target;
+    setState(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  }
 
   const add_image = (e) => {
     const { files } = e.target;
@@ -31,6 +44,12 @@ const Profile = () => {
     formData.append('image', files[0]);
     dispatch(profile_image_upload(formData))
   }
+
+  const add_profile_info = (e) => {
+    e.preventDefault();
+    dispatch(profile_info_add(state));
+  }
+
   return (
     <div className='px-2 lg:px-7 pt-5'>
       <div className='w-full flex flex-wrap'>
@@ -91,38 +110,42 @@ const Profile = () => {
 
             <div className='px-0 md:px-5 py-2'>
               {
-                !userInfo?.shopInfo ? <form>
+                !userInfo?.shopInfo ? <form onSubmit={add_profile_info}>
                   <div className='flex flex-col w-full gap-1 mb-3'>
-                    <label htmlFor="shopname">Tên cửa hàng</label>
-                    <input className='px-3 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="text" name='shopname' id='shopname' placeholder='Nhập tên cửa hàng' />
+                    <label htmlFor="shopName">Tên cửa hàng</label>
+                    <input onChange={inputHandle} value={state.shopName} className='px-3 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="text" name='shopName' id='shopName' placeholder='Nhập tên cửa hàng' />
                   </div>
                   <div className='flex flex-col w-full gap-1 mb-3'>
                     <label htmlFor="city">Tỉnh / Thành phố</label>
-                    <input className='px-3 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="text" name='city' id='city' placeholder='Nhập tỉnh hoặc thành phố' />
+                    <input onChange={inputHandle} value={state.city} className='px-3 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="text" name='city' id='city' placeholder='Nhập tỉnh hoặc thành phố' />
                   </div>
                   <div className='flex flex-col w-full gap-1 mb-3'>
                     <label htmlFor="address">Địa chỉ</label>
-                    <input className='px-3 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="text" name='address' id='address' placeholder='Nhập địa chỉ' />
+                    <input onChange={inputHandle} value={state.address} className='px-3 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="text" name='address' id='address' placeholder='Nhập địa chỉ' />
                   </div>
                   <div>
-                    <button className='bg-red-500 shadow-red-500/50 hover:shadow-lg rounded-lg text-white px-7 py-2 '>Cập nhật</button>
+                    <button disabled={loadingProfile} className='bg-red-500 shadow-red-500/50 hover:shadow-lg rounded-lg text-white px-7 py-2 '>
+                      {
+                        loadingProfile ? <ClipLoader color='white' /> : 'Cập nhật'
+                      }
+                    </button>
                   </div>
                 </form>
                   :
                   <div className='flex justify-center flex-col gap-2 p-4 text-base bg-slate-800 rounded-md relative'>
-                    <span className='absolute top-2 right-2 z-20 bg-yellow-500 p-[6px] rounded-md shadow-yellow-500/50 hover:shadow-lg cursor-pointer'><FaEdit /></span>
+                    <span onClick={() => setShow(!show)} className='absolute top-2 right-2 z-20 bg-yellow-500 p-[6px] rounded-md shadow-yellow-500/50 hover:shadow-lg cursor-pointer'><FaEdit /></span>
                     <div className='flex gap-3'>
                       <span className='font-bold'>Tên cửa hàng: </span>
-                      <span>Eazy Shop </span>
+                      <span>{userInfo?.shopInfo?.shopName}</span>
                     </div>
 
                     <div className='flex gap-3'>
                       <span className='font-bold'>Tỉnh / Thành phố: </span>
-                      <span>Bắc Ninh</span>
+                      <span>{userInfo?.shopInfo?.city}</span>
                     </div>
                     <div className='flex gap-3'>
                       <span className='font-bold'>Địa chỉ: </span>
-                      <span>Yên Vĩ - Tam Giang - Bắc Ninh </span>
+                      <span>{userInfo?.shopInfo?.address}</span>
                     </div>
                   </div>
               }
