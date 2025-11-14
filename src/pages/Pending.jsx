@@ -1,7 +1,15 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Pending = () => {
+  const { userInfo } = useSelector(status => status.auth);
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (userInfo?.status !== 'pending') {
+      navigate('/seller/dashboard')
+    }
+  })
   return (
     <div className='px-2 lg:px-7 pt-5'>
       <div className="flex flex-col lg:flex-row justify-center items-center h-screen bg-white px-5">
