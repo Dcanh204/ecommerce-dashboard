@@ -9,13 +9,13 @@ const Header = ({ showSidebar, setShowSidebar }) => {
         </button>
 
         <div className='hidden md:block'>
-          <input className='w-[250px] px-3 py-2 outline-none border border-slate-700 rounded-md bg-transparent focus:border-indigo-600' type="text" name='search' placeholder='Tìm kiếm' />
+          <input className='w-[250px] px-3 py-1 outline-none border border-slate-700 rounded-md bg-transparent focus:border-indigo-600' type="text" name='search' placeholder='Tìm kiếm' />
         </div>
 
         <div className='flex justify-center items-center gap-3'>
           <div className='flex flex-col text-end'>
-            <h2 className='text-base font-bold'>Đình Cảnh</h2>
-            <span className='text-sm w-full'>Admin</span>
+            <h2 className='text-sm font-bold'>Đình Cảnh</h2>
+            <span className='text-xs w-full'>Admin</span>
           </div>
           <img className='w-[45px] h-[45px] rounded-full overflow-hidden' src="/images/admin.jpg" alt="" />
         </div>

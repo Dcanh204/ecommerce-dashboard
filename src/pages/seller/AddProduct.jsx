@@ -145,25 +145,25 @@ const AddProduct = () => {
             <div className='w-full flex flex-col md:flex-row gap-4 text-[#d0d2d6] mb-3'>
               <div className='flex flex-col w-full gap-1'>
                 <label htmlFor="name">Tên sản phẩm</label>
-                <input onChange={inputHandle} value={state.name} className='px-3 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="text" name='name' id='name' placeholder='Nhập tên sản phẩm' />
+                <input onChange={inputHandle} value={state.name} className='px-3 py-1 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="text" name='name' id='name' placeholder='Nhập tên sản phẩm' />
               </div>
               <div className='flex flex-col w-full gap-1'>
                 <label htmlFor="brand">Tên thương hiệu</label>
-                <input onChange={inputHandle} value={state.brand} className='px-3 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="text" name='brand' id='brand' placeholder='Nhập tên thương hiệu' />
+                <input onChange={inputHandle} value={state.brand} className='px-3 py-1 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="text" name='brand' id='brand' placeholder='Nhập tên thương hiệu' />
               </div>
             </div>
 
             <div className='w-full flex flex-col md:flex-row gap-4 text-[#d0d2d6] mb-3'>
               <div className='flex flex-col w-full gap-1 relative'>
                 <label htmlFor="category">Danh mục</label>
-                <input onClick={() => setCateShow(!cateShow)} value={category} readOnly className='px-3 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="text" name='category' id='category' placeholder='-- Chọn danh mục --' />
+                <input onClick={() => setCateShow(!cateShow)} value={category} readOnly className='px-3 py-1 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="text" name='category' id='category' placeholder='-- Chọn danh mục --' />
                 <div className={`absolute z-20 top-[101%] w-full bg-[#475569] transition-all ${cateShow ? 'scale-100' : 'scale-0'} duration-300`}>
                   <div className='w-full px-4 py-2'>
                     <input onChange={categorySearch} className='w-full px-3 py-1 focus:border-indigo-500 outline-none bg-transparent  border border-slate-700 rounded-md text-[#d0d2d6]' type="text" placeholder='Tìm kiếm' value={searchValue} />
                   </div>
                   <div className='flex flex-col justify-start items-start h-[170px] overflow-y-auto'>
                     {
-                      allCategory.map((item, index) => <span key={index} className={`px-4 py-2 hover:bg-indigo-500 hover:text-white w-full cursor-pointer`} onClick={() => {
+                      allCategory.map((item, index) => <span key={index} className={`px-4 py-2 hover:bg-indigo-500 hover:text-white w-full cursor-pointer text-sm`} onClick={() => {
                         setCateShow(false)
                         setCategory(item.category_name)
                         setSearchValue('')
@@ -178,24 +178,24 @@ const AddProduct = () => {
               </div>
               <div className='flex flex-col w-full gap-1'>
                 <label htmlFor="stock">Số lượng sản phẩm</label>
-                <input min={0} onChange={inputHandle} value={state.stock} className='px-3 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="text" name='stock' id='stock' placeholder='Nhập số lượng sản phẩm' />
+                <input min={0} onChange={inputHandle} value={state.stock} className='px-3 py-1 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="text" name='stock' id='stock' placeholder='Nhập số lượng sản phẩm' />
               </div>
             </div>
 
             <div className='w-full flex flex-col md:flex-row gap-4 text-[#d0d2d6] mb-3'>
               <div className='flex flex-col w-full gap-1'>
                 <label htmlFor="price">Giá</label>
-                <input min={0} onChange={inputHandle} value={state.price} className='px-3 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="number" name='price' id='price' placeholder='Nhập giá sản phẩm' />
+                <input min={0} onChange={inputHandle} value={state.price} className='px-3 py-1 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="number" name='price' id='price' placeholder='Nhập giá sản phẩm' />
               </div>
               <div className='flex flex-col w-full gap-1'>
                 <label htmlFor="discount">Giảm giá</label>
-                <input min={0} onChange={inputHandle} value={state.discount} className='px-3 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="number" name='discount' id='discount' placeholder='% Nhập phần trăm giảm giá' />
+                <input min={0} onChange={inputHandle} value={state.discount} className='px-3 py-1 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="number" name='discount' id='discount' placeholder='% Nhập phần trăm giảm giá' />
               </div>
             </div>
 
             <div className='flex flex-col w-full gap-1 text-[#d0d2d6] mb-5'>
               <label htmlFor="description">Mô tả</label>
-              <textarea onChange={inputHandle} value={state.description} className='px-3 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="type" name='description' id='description' placeholder='Nhập mô tả' cols={10} rows={4} />
+              <textarea onChange={inputHandle} value={state.description} className='px-3 py-1 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="type" name='description' id='description' placeholder='Nhập mô tả' cols={10} rows={3} />
             </div>
 
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 sm:gap-4 lg:gap-4 xl:gap-5 gap-3 w-full text-[#d0d2d6]'>

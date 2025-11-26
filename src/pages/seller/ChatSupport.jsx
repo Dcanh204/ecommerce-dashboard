@@ -12,7 +12,7 @@ const ChatSupport = () => {
                   <div className='w-[10px] h-[10px] bg-green-500 rounded-full bottom-0 right-0 absolute'></div>
                 </div>
                 <div className='flex flex-col'>
-                  <h2 className='text-base font-medium text-white'>Admin</h2>
+                  <h2 className='text-sm font-medium text-white'>Admin</h2>
                 </div>
               </div>
 
@@ -23,7 +23,7 @@ const ChatSupport = () => {
                 <div className='w-full flex justify-end items-center'>
                   <div className='flex justify-start items-center gap-2 md:px-3 py-2 max-w-full lg:max-w-[85%]'>
                     <div className='flex justify-center items-start flex-col w-full bg-blue-500 text-white px-3 py-1 rounded-lg'>
-                      <span>Bạn có rảnh không? Cho tôi hỏi cái này.</span>
+                      <span className='text-sm'>Bạn có rảnh không? Cho tôi hỏi cái này.</span>
                     </div>
                     <img className='w-[38px] h-38[px] rounded-full border-2 border-white p-[3px] max-w-[38px]' src="/images/admin.jpg" alt="demo" />
                   </div>
@@ -33,7 +33,7 @@ const ChatSupport = () => {
                   <div className='flex justify-start items-center gap-2 md:px-3 py-2 max-w-full lg:max-w-[85%]'>
                     <img className='w-[38px] h-38[px] rounded-full border-2 border-white p-[3px] max-w-[38px]' src="/images/admin.jpg" alt="demo" />
                     <div className='flex justify-center items-start flex-col w-full bg-slate-200 text-black px-3 py-1 rounded-lg'>
-                      <span>Tôi có, bạn hỏi đi </span>
+                      <span className='text-sm'>Tôi có, bạn hỏi đi </span>
                     </div>
 
                   </div>
@@ -42,7 +42,7 @@ const ChatSupport = () => {
                 <div className='w-full flex justify-end items-center'>
                   <div className='flex justify-start items-center gap-2 md:px-3 py-2 max-w-full lg:max-w-[85%]'>
                     <div className='flex justify-center items-start flex-col w-full bg-blue-500 text-white px-3 py-1 rounded-lg break-words'>
-                      <span>Có thể cho tôi xin nghỉ ngày mai không? </span>
+                      <span className='text-sm'>Có thể cho tôi xin nghỉ ngày mai không? </span>
                     </div>
                     <img className='w-[38px] h-38[px] rounded-full border-2 border-white p-[3px] max-w-[38px]' src="/images/admin.jpg" alt="demo" />
                   </div>

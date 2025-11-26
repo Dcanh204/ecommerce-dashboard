@@ -80,7 +80,7 @@ const Profile = () => {
             </div>
 
             <div className='px-0 md:px-5 py-2'>
-              <div className='flex justify-center flex-col gap-2 p-4 text-base bg-slate-800 rounded-md relative'>
+              <div className='flex justify-center flex-col gap-2 p-4 text-sm bg-slate-800 rounded-md relative'>
                 <span className='absolute top-2 right-2 z-20 bg-yellow-500 p-[6px] rounded-md shadow-yellow-500/50 hover:shadow-lg cursor-pointer'><FaEdit /></span>
                 <div className='flex gap-3'>
                   <span className='font-bold'>Họ tên: </span>
@@ -111,7 +111,7 @@ const Profile = () => {
             <div className='px-0 md:px-5 py-2'>
               {
                 !userInfo?.shopInfo ? <form onSubmit={add_profile_info}>
-                  <div className='flex flex-col w-full gap-1 mb-3'>
+                  <div className='flex flex-col w-full gap-1 mb-3 text-sm'>
                     <label htmlFor="shopName">Tên cửa hàng</label>
                     <input onChange={inputHandle} value={state.shopName} className='px-3 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="text" name='shopName' id='shopName' placeholder='Nhập tên cửa hàng' />
                   </div>
@@ -133,7 +133,7 @@ const Profile = () => {
                 </form>
                   :
                   <div className='flex justify-center flex-col gap-2 p-4 text-base bg-slate-800 rounded-md relative'>
-                    <span onClick={() => setShow(!show)} className='absolute top-2 right-2 z-20 bg-yellow-500 p-[6px] rounded-md shadow-yellow-500/50 hover:shadow-lg cursor-pointer'><FaEdit /></span>
+                    <span onClick={() => setShow(!show)} className='absolute top-2 right-2 z-20 bg-yellow-500 p-[6px] rounded-md shadow-yellow-500/50 hover:shadow-lg cursor-pointer text-sm'><FaEdit /></span>
                     <div className='flex gap-3'>
                       <span className='font-bold'>Tên cửa hàng: </span>
                       <span>{userInfo?.shopInfo?.shopName}</span>
@@ -158,7 +158,7 @@ const Profile = () => {
             <div className='w-full p-4 rounded-md bg-[#6a5fdf] text-[#d0d2d6]'>
               <h2 className='font-medium text-xl text-[#d0d2d6] mb-4'>Thay đổi mật khẩu</h2>
               <form>
-                <div className='flex flex-col w-full gap-1 mb-3'>
+                <div className='flex flex-col w-full gap-1 mb-3 text-sm'>
                   <label htmlFor="email">Email</label>
                   <input className='px-3 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="email" name='email' id='email' placeholder='Nhập email' />
                 </div>
@@ -166,9 +166,9 @@ const Profile = () => {
                   <label htmlFor="oldPassword">Mật khẩu cũ</label>
                   <input className='pl-2 pr-14 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type={showOldPassword ? 'text' : 'password'} name='oldPassword' id='oldPassword' placeholder='Nhập mật khẩu cũ' />
                   {
-                    showOldPassword ? <span onClick={() => setShowOldPassword(!showOldPassword)} className='flex justify-center items-center absolute z-10 top-10 right-5 cursor-pointer'><FaEye /></span>
+                    showOldPassword ? <span onClick={() => setShowOldPassword(!showOldPassword)} className='flex justify-center items-center absolute z-10 top-10 right-5 cursor-pointer'><FaEyeSlash /></span>
                       :
-                      <span onClick={() => setShowOldPassword(!showOldPassword)} className='flex justify-center items-center absolute top-10 right-5 z-10 cursor-pointer'><FaEyeSlash /></span>
+                      <span onClick={() => setShowOldPassword(!showOldPassword)} className='flex justify-center items-center absolute top-10 right-5 z-10 cursor-pointer'><FaEye /></span>
                   }
 
                 </div>
@@ -176,18 +176,18 @@ const Profile = () => {
                   <label htmlFor="newPassword">Mật khẩu mới</label>
                   <input className='pl-2 pr-14 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type={showNewPassword ? 'text' : 'password'} name='newPassword' id='newPassword' placeholder='Nhập mật khẩu mới' />
                   {
-                    showNewPassword ? <span onClick={() => setShowNewPassword(!showNewPassword)} className='flex justify-center items-center absolute z-10 top-10 right-5 cursor-pointer'><FaEye /></span>
+                    showNewPassword ? <span onClick={() => setShowNewPassword(!showNewPassword)} className='flex justify-center items-center absolute z-10 top-10 right-5 cursor-pointer'><FaEyeSlash /></span>
                       :
-                      <span onClick={() => setShowNewPassword(!showNewPassword)} className='flex justify-center items-center absolute top-10 right-5 z-10 cursor-pointer'><FaEyeSlash /></span>
+                      <span onClick={() => setShowNewPassword(!showNewPassword)} className='flex justify-center items-center absolute top-10 right-5 z-10 cursor-pointer'><FaEye /></span>
                   }
                 </div>
                 <div className='flex flex-col w-full gap-1 mb-3 relative'>
                   <label htmlFor="confirmNewWord">Nhập lại mật khẩu mới</label>
                   <input className='pl-2 pr-14 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type={showConfirmPassword ? 'text' : 'password'} name='confirmNewWord' id='confirmNewWord' placeholder='Nhập lại mật khẩu mới' />
                   {
-                    showConfirmPassword ? <span onClick={() => setShowConfirmPassword(!showConfirmPassword)} className='flex justify-center items-center absolute z-10 top-10 right-5 cursor-pointer'><FaEye /></span>
+                    showConfirmPassword ? <span onClick={() => setShowConfirmPassword(!showConfirmPassword)} className='flex justify-center items-center absolute z-10 top-10 right-5 cursor-pointer'><FaEyeSlash /></span>
                       :
-                      <span onClick={() => setShowConfirmPassword(!showConfirmPassword)} className='flex justify-center items-center absolute z-10 top-10 right-5 cursor-pointer'><FaEyeSlash /></span>
+                      <span onClick={() => setShowConfirmPassword(!showConfirmPassword)} className='flex justify-center items-center absolute z-10 top-10 right-5 cursor-pointer'><FaEye /></span>
                   }
                 </div>
                 <div>

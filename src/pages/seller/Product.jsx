@@ -61,7 +61,7 @@ const Product = () => {
       <div className='w-full p-4 bg-[rgb(106,95,223)] rounded-md'>
         <Search setParPage={setParPage} setSearchValue={setSearchValue} searchValue={searchValue} />
         <div className='overflow-x-auto'>
-          <table className='w-full text-base text-left text-[#d0d2d6]'>
+          <table className='w-full text-xs text-left text-[#d0d2d6]'>
             <thead className='uppercase border-b border-slate-700'>
               <tr>
                 <th scope='col' className='py-3 px-4'>STT</th>

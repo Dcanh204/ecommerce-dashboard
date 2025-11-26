@@ -28,7 +28,7 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
             {allNav.map((item, index) => {
               return (
                 <li key={index}>
-                  <Link to={item.path} className={`${pathname === item.path ? 'bg-blue-600 text-white shadow-indigo-500/50 duration-500 ' : 'text-[#030811] font-bold duration-200'} flex justify-start items-center px-[12px] py-[9px] gap-[12px] w-full mb-1 hover:pl-4 transition-all rounded-sm `}>
+                  <Link to={item.path} className={`${pathname === item.path ? 'bg-blue-600 text-white shadow-indigo-500/50 duration-500 ' : 'text-[#030811] font-bold duration-200'} flex justify-start items-center px-[12px] py-[9px] gap-[12px] w-full mb-1 hover:pl-4 transition-all rounded-sm text-sm`}>
                     <span>{item.icon}</span>
                     <span>{item.title}</span>
                   </Link>
@@ -37,7 +37,7 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
             })}
 
             <li>
-              <button className='text-[#030811] font-bold duration-200 flex justify-start items-center px-[12px] py-[9px] gap-[12px] w-full mb-1 hover:pl-4 transition-all rounded-sm'>
+              <button className='text-[#030811] font-bold duration-200 flex justify-start items-center px-[12px] py-[9px] gap-[12px] w-full mb-1 hover:pl-4 transition-all rounded-sm text-sm'>
                 <span><BiLogOutCircle /></span>
                 <span>Logout</span>
               </button>

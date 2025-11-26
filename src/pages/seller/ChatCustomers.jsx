@@ -24,7 +24,7 @@ const ChatCustomers = () => {
                 </div>
 
                 <div className='flex flex-col'>
-                  <h2 className='text-base font-semibold'>Đình Cảnh</h2>
+                  <h2 className='text-sm font-semibold'>Đình Cảnh</h2>
                 </div>
               </div>
 
@@ -35,7 +35,7 @@ const ChatCustomers = () => {
                 </div>
 
                 <div className='flex flex-col'>
-                  <h2 className='text-base font-semibold'>Phương Thảo</h2>
+                  <h2 className='text-sm font-semibold'>Phương Thảo</h2>
                 </div>
               </div>
 
@@ -46,7 +46,7 @@ const ChatCustomers = () => {
                 </div>
 
                 <div className='flex flex-col'>
-                  <h2 className='text-base font-semibold'>Bá Khương</h2>
+                  <h2 className='text-sm font-semibold'>Bá Khương</h2>
                 </div>
               </div>
 
@@ -62,7 +62,7 @@ const ChatCustomers = () => {
                     <div className='w-[10px] h-[10px] bg-green-500 rounded-full bottom-0 right-0 absolute'></div>
                   </div>
                   <div className='flex flex-col'>
-                    <h2 className='text-base font-medium text-white'>Đình Cảnh</h2>
+                    <h2 className='text-sm font-medium text-white'>Đình Cảnh</h2>
                   </div>
                 </div>
               }
@@ -78,7 +78,7 @@ const ChatCustomers = () => {
                   <div className='flex justify-start items-center gap-2 md:px-3 py-2 max-w-full lg:max-w-[85%]'>
                     <img className='w-[38px] h-38[px] rounded-full border-2 border-white p-[3px] max-w-[38px]' src="/images/admin.jpg" alt="demo" />
                     <div className='flex justify-center items-start flex-col w-full bg-slate-200 text-black px-3 py-1 rounded-lg'>
-                      <span>Nếu như tôi mua sản phẩm mà không thích có được đổi trả không?</span>
+                      <span className='text-sm'>Nếu như tôi mua sản phẩm mà không thích có được đổi trả không?</span>
                     </div>
                   </div>
                 </div>
@@ -86,7 +86,7 @@ const ChatCustomers = () => {
                 <div className='w-full flex justify-end items-center'>
                   <div className='flex justify-start items-center gap-2 md:px-3 py-2 max-w-full lg:max-w-[85%]'>
                     <div className='flex justify-center items-start flex-col w-full bg-blue-500 text-white px-3 py-1 rounded-lg'>
-                      <span>Bên mình chỉ hỗ trợ đổi trả khi sản phẩm bị lỗi thôi ạ.</span>
+                      <span className='text-sm'>Bên mình chỉ hỗ trợ đổi trả khi sản phẩm bị lỗi thôi ạ.</span>
                     </div>
                     <img className='w-[38px] h-38[px] rounded-full border-2 border-white p-[3px] max-w-[38px]' src="/images/admin.jpg" alt="demo" />
                   </div>
@@ -96,7 +96,7 @@ const ChatCustomers = () => {
                   <div className='flex justify-start items-center gap-2 md:px-3 py-2 max-w-full lg:max-w-[85%]'>
                     <img className='w-[38px] h-38[px] rounded-full border-2 border-white p-[3px] max-w-[38px]' src="/images/admin.jpg" alt="demo" />
                     <div className='flex justify-center items-start flex-col w-full bg-slate-200 text-black px-3 py-1 rounded-lg break-words'>
-                      <span>Cảm ơn, tôi hiểu rồi. </span>
+                      <span className='text-sm'>Cảm ơn, tôi hiểu rồi. </span>
                     </div>
                   </div>
                 </div>

@@ -7,8 +7,8 @@ const OrderDetails = () => {
         <div className='flex flex-wrap'>
           <div className='w-full xl:w-[30%]'>
             <div className='p-5 border border-slate-200 rounded-md shadow-md'>
-              <h2 className='font-medium  text-2xl text-[#d0d2d6]'>Chi tiết đơn hàng</h2>
-              <div className="text-[20px] mt-2 text-[#d0d2d6] flex-col gap-2">
+              <h2 className='font-medium  text-xl text-[#d0d2d6]'>Chi tiết đơn hàng</h2>
+              <div className="text-sm mt-2 text-[#d0d2d6] flex-col gap-2">
                 <div className="flex justify-between">
                   <span className="font-medium">#343434</span>
                   <span>27-09-2025</span>
@@ -88,7 +88,7 @@ const OrderDetails = () => {
             <div className='pl-0 xl:pl-3 mt-3 lg:mt-0'>
               <div className='p-5 border border-slate-200 rounded-md shadow-md'>
                 <div className='flex justify-between items-center'>
-                  <h2 className='font-medium  text-2xl text-[#d0d2d6]'>Đơn hàng theo người bán</h2>
+                  <h2 className='font-medium  text-xl text-[#d0d2d6]'>Đơn hàng theo người bán</h2>
                   <select className='px-4 py-2 focus:border-indigo-500 outline-none bg-[#475569] border border-slate-700 rounded-md text-[#d0d2d6]'>
                     <option value="Đang xử lý">Đang xử lý</option>
                     <option value="Đang xử lý">Chờ xác nhận</option>
@@ -98,7 +98,7 @@ const OrderDetails = () => {
                   </select>
                 </div>
                 <div className='overflow-x-auto overflow-y-auto'>
-                  <table className='w-full text-left bg-[#8288ed] rounded-md mt-3'>
+                  <table className='w-full text-left bg-[#8288ed] rounded-md mt-3 text-xs'>
                     <thead>
                       <tr className='border-b border-slate-700'>
                         <th className='px-4 py-2 whitespace-nowrap'>Ảnh</th>
