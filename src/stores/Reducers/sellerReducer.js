@@ -1,6 +1,6 @@
 
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { api } from './../../api/api';
+import { api } from '../../api/api';
 
 export const get_seller_request = createAsyncThunk(
   'seller/get_seller_request',
@@ -14,7 +14,6 @@ export const get_seller_request = createAsyncThunk(
     }
   }
 )
-
 export const getSellerById = createAsyncThunk(
   'seller/getSellerById',
   async (sellerId, { rejectWithValue }) => {
@@ -52,8 +51,8 @@ const sellerReducer = createSlice({
   },
   reducers: {
     messageClear: (state) => {
-      state.successMessage = '',
-        state.errorMessage = ''
+      state.successMessage = '';
+      state.errorMessage = '';
     }
   },
   extraReducers: (builder) => {

@@ -1,11 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Pagination from '../../components/Pagination';
 import { Link } from 'react-router-dom';
 import { FaEye } from "react-icons/fa";
+import { useDispatch, useSelector } from 'react-redux';
+import { get_seller_request } from '../../stores/Reducers/sellerReducer';
 const DeactiveSellers = () => {
+  const dispatch = useDispatch();
+  const { sellers, totalSellers } = useSelector(state => state.seller);
   const [currentPage, setCurrentPage] = useState(1)
   const [parPage, setParPage] = useState(5);
   const [searchValue, setSearchValue] = useState('');
+  const [debouncedSearch, setDebouncedSearch] = useState(searchValue);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(searchValue)
+    }, 500)
+    return () => clearTimeout(handler);
+  }, [searchValue])
+
+  useEffect(() => {
+    const obj = {
+      page: currentPage,
+      parPage,
+      searchValue: debouncedSearch,
+      status: 'deactive'
+    }
+    dispatch(get_seller_request(obj))
+  }, [currentPage, dispatch, debouncedSearch, parPage])
   return (
     <div className='px-2 lg:px-7 pt-5'>
       <h1 className='font-bold text-[25px] mb-3'>Vô hiệu hóa người bán</h1>
@@ -20,7 +42,7 @@ const DeactiveSellers = () => {
           <input onChange={(e) => setSearchValue(e.target.value)} className='w-[250px] px-3 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="text" name='search' placeholder='Tìm kiếm' />
         </div>
         <div className='overflow-x-auto'>
-          <table className='w-full text-base text-left text-[#d0d2d6]'>
+          <table className='w-full text-xs text-left text-[#d0d2d6]'>
             <thead className='uppercase border-b border-slate-700'>
               <tr>
                 <th scope='col' className='py-3 px-4'>STT</th>
@@ -34,18 +56,18 @@ const DeactiveSellers = () => {
               </tr>
             </thead>
             <tbody>
-              {[1, 2, 3, 4, 5].map((item, index) =>
+              {sellers.map((item, index) =>
                 <tr key={index}>
-                  <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{item}</td>
+                  <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{index + 1}</td>
                   <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>
-                    <img className='w-[50px] h-[50px]' src={`/images/category/${item}.jpg`} alt="category" />
+                    <img className='w-[50px] h-[50px]' src={item.image} alt="" />
                   </td>
-                  <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>Nguyễn Đình Cảnh</td>
-                  <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>Dinhcanh2004@gmail.com</td>
-                  <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>Chờ xử lý</td>
-                  <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>Vô hiệu hóa</td>
+                  <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{item.name}</td>
+                  <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{item.email}</td>
+                  <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{item.payment}</td>
+                  <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{item.status}</td>
                   <td scope='row' className='py-3 px-4 lg:px-8 font-medium whitespace-nowrap'>
-                    <Link className='inline-block p-[6px] bg-green-500 rounded-md hover:shadow-lg hover:bg-green-400/50 '><FaEye /></Link>
+                    <Link to={`/admin/dashboard/sellers/${item._id}`} className='inline-block p-[6px] bg-green-500 rounded-md hover:shadow-lg hover:bg-green-400/50 '><FaEye /></Link>
                   </td>
                 </tr>
               )}
@@ -53,13 +75,16 @@ const DeactiveSellers = () => {
           </table>
         </div>
         <div className='w-full flex justify-end mt-2'>
-          <Pagination
-            pageNumber={currentPage}
-            setPageNumber={setCurrentPage}
-            totalItem={50}
-            parPage={parPage}
-            showItem={3}
-          />
+          {
+            totalSellers > parPage && <Pagination
+              pageNumber={currentPage}
+              setPageNumber={setCurrentPage}
+              totalItem={totalSellers}
+              parPage={parPage}
+              showItem={3}
+            />
+          }
+
         </div>
       </div>
     </div>

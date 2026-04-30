@@ -3,6 +3,7 @@ import { MdCurrencyExchange, MdProductionQuantityLimits } from "react-icons/md";
 import { FaCartArrowDown } from "react-icons/fa";
 import Chart from 'react-apexcharts'
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const SellerDashboard = () => {
   const state = {

@@ -126,14 +126,14 @@ const Category = () => {
   return (
     <div className='px-2 lg:px-7 mt-5'>
       <div className='flex lg:hidden justify-between items-center p-4 mb-5 bg-[#6a5fdf] rounded-md'>
-        <h1 className='text-[#d0d2d6] font-semibold text-lg'>Danh mục</h1>
+        <h1 className='text-[#d0d2d6] font-semibold text-base'>Danh mục</h1>
         <button onClick={() => setShow(true)} className='bg-red-500 rounded-md hover:bg-red-500/40 px-4 py-2 text-white cursor-pointer text-base'>Thêm</button>
       </div>
       <div className='w-full flex flex-wrap'>
         <div className='w-full lg:w-7/12 bg-[#6a5fdf] rounded-md p-4'>
           <Search setParPage={setParPage} setSearchValue={setSearchValue} searchValue={searchValue} />
           <div className='overflow-x-auto'>
-            <table className='w-full text-base text-left text-[#d0d2d6]'>
+            <table className='w-full text-xs text-left text-[#d0d2d6]'>
               <thead className='uppercase border-b border-slate-700'>
                 <tr>
                   <th scope='col' className='py-3 px-4'>STT</th>

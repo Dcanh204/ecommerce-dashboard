@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { api } from './../../api/api';
+import { api } from '../../api/api';
 import { jwtDecode } from 'jwt-decode';
 export const admin_login = createAsyncThunk(
   'auth/admin_login',
@@ -88,6 +88,24 @@ export const profile_info_add = createAsyncThunk(
     try {
       const { data } = await api.post('/auth/profile-info-add', shopInfo, { withCredentials: true });
       console.log(data)
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+)
+
+export const logout = createAsyncThunk(
+  'auth/logout',
+  async ({ navigate, role }, { rejectWithValue }) => {
+    try {
+      const { data } = await api.get('/auth/logout', { withCredentials: true });
+      localStorage.removeItem('accessToken');
+      if (role === "admin") {
+        navigate('/admin/login')
+      } else {
+        navigate('/login')
+      }
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -193,6 +211,10 @@ const authReducer = createSlice({
       .addCase(profile_info_add.rejected, (state, action) => {
         state.loadingProfile = false;
         state.errorMessage = action.payload?.message;
+      })
+
+      .addCase(logout.fulfilled, (state, action) => {
+        state.successMessage = action.payload?.message;
       })
 
   }

@@ -81,8 +81,8 @@ const AdminDashboard = () => {
       <div className='w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-7'>
         <div className='flex justify-between items-center bg-[#fae8e8] p-5 rounded-md gap-3'>
           <div className='flex flex-col justify-start items-start text-[#5c5a5a]'>
-            <h2 className='text-3xl font-bold'>45.000.000đ</h2>
-            <span className='text-base font-medium'>Tổng doanh thu</span>
+            <h2 className='text-xl font-bold'>45.000.000đ</h2>
+            <span className='text-sm font-medium'>Tổng doanh thu</span>
           </div>
           <div className='w-[40px] h-[47px] flex justify-center items-center rounded-full bg-[#fa0308] text-xl'>
             <span><MdCurrencyExchange className='text-[#fae8e8] shadow-lg' /></span>
@@ -91,8 +91,8 @@ const AdminDashboard = () => {
 
         <div className='flex justify-between items-center bg-[#fde2ff] p-5 rounded-md gap-3'>
           <div className='flex flex-col justify-start items-start text-[#5c5a5a]'>
-            <h2 className='text-3xl font-bold'>50</h2>
-            <span className='text-base font-medium'>Sản phẩm</span>
+            <h2 className='text-xl font-bold'>50</h2>
+            <span className='text-sm font-medium'>Sản phẩm</span>
           </div>
           <div className='w-[40px] h-[47px] flex justify-center items-center rounded-full bg-[#760077] text-xl'>
             <span><MdProductionQuantityLimits className='text-[#fae8e8] shadow-lg' /></span>
@@ -101,8 +101,8 @@ const AdminDashboard = () => {
 
         <div className='flex justify-between items-center bg-[#e9feea] p-5 rounded-md gap-3'>
           <div className='flex flex-col justify-start items-start text-[#5c5a5a]'>
-            <h2 className='text-3xl font-bold'>60</h2>
-            <span className='text-base font-medium'>Nhân viên bán hàng</span>
+            <h2 className='text-xl font-bold'>60</h2>
+            <span className='text-sm font-medium'>Nhân viên bán hàng</span>
           </div>
           <div className='w-[40px] h-[47px] flex justify-center items-center rounded-full bg-[#038000] text-xl'>
             <span><FaUsers className='text-[#fae8e8] shadow-lg' /></span>
@@ -111,8 +111,8 @@ const AdminDashboard = () => {
 
         <div className='flex justify-between items-center bg-[#ecebff] p-5 rounded-md gap-3'>
           <div className='flex flex-col justify-start items-start text-[#5c5a5a]'>
-            <h2 className='text-3xl font-bold'>54</h2>
-            <span className='text-base font-medium'>Đơn hàng</span>
+            <h2 className='text-xl font-bold'>54</h2>
+            <span className='text-sm font-medium'>Đơn hàng</span>
           </div>
           <div className='w-[40px] h-[47px] flex justify-center items-center rounded-full bg-[#0020f8] text-xl'>
             <span><FaCartArrowDown className='text-[#fae8e8] shadow-lg' /></span>
@@ -129,7 +129,7 @@ const AdminDashboard = () => {
         <div className='w-full lg:w-5/12 lg:pl-4 mt-6 lg:mt-0'>
           <div className='w-full bg-[#6a5fdf] p-4 rounded-md'>
             <div className='flex justify-between items-center text-[#d0d2d6]'>
-              <h2 className='font-semibold text-lg'>Tin nhắn gần đây</h2>
+              <h2 className='font-semibold text-base'>Tin nhắn gần đây</h2>
               <Link className='font-semibold text-sm'>Xem tất cả</Link>
             </div>
 
@@ -185,12 +185,12 @@ const AdminDashboard = () => {
 
       <div className='w-full p-4 bg-[#6a5fdf] rounded-md mt-6'>
         <div className='flex justify-between items-center  text-[#d0d2d6] pb-2'>
-          <h2 className='font-semibold text-lg'>Đơn hàng gần đây</h2>
+          <h2 className='font-semibold text-base'>Đơn hàng gần đây</h2>
           <Link className='font-semibold text-sm'>Xem tất cả</Link>
         </div>
 
         <div className='overflow-x-auto'>
-          <table className='w-full text-sm text-left text-[#d0d2d6]'>
+          <table className='w-full text-xs text-left text-[#d0d2d6]'>
             <thead className='uppercase border-b border-slate-700'>
               <tr>
                 <th scope='col' className='py-3 px-4'>Mã đơn hàng</th>
