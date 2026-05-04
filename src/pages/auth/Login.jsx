@@ -93,7 +93,7 @@ const Login = () => {
             <div className="flex justify-center items-center mb-3 gap-3">
               <p className='text-xs'>
                 Chưa có tài khoản?
-                <Link className="font-bold ml-1" to="/register" classNametext-sm>Đăng ký</Link>
+                <Link className="font-bold ml-1" to="/register" className="text-sm">Đăng ký</Link>
               </p>
             </div>
 

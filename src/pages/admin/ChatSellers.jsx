@@ -10,7 +10,7 @@ const ChatSellers = () => {
         <div className='w-full h-full relative flex'>
           <div className={`w-[280px] absolute h-full z-10 ${show ? 'left-0' : '-left-[336px]'} md:left-0 md:relative transition-all`}>
             <div className='w-full h-[calc(100vh-177px)] bg-[#9e97e9] md:bg-transparent overflow-y-auto'>
-              <div className='flex text-xl justify-between items-center p-4 md:p-0 md:px-3 md:pb-3 text-white'>
+              <div className='flex text-lg justify-between items-center p-4 md:p-0 md:px-3 md:pb-3 text-white'>
                 <h2>Nhân viên bán hàng</h2>
                 <span onClick={() => setShow(false)} className='block cursor-pointer md:hidden'>
                   <IoMdClose />
@@ -24,7 +24,7 @@ const ChatSellers = () => {
                 </div>
 
                 <div className='flex flex-col'>
-                  <h2 className='text-base font-semibold'>Đình Cảnh</h2>
+                  <h2 className='text-sm font-semibold'>Đình Cảnh</h2>
                 </div>
               </div>
 
@@ -35,7 +35,7 @@ const ChatSellers = () => {
                 </div>
 
                 <div className='flex flex-col'>
-                  <h2 className='text-base font-semibold'>Phương Thảo</h2>
+                  <h2 className='text-sm font-semibold'>Phương Thảo</h2>
                 </div>
               </div>
 
@@ -46,7 +46,7 @@ const ChatSellers = () => {
                 </div>
 
                 <div className='flex flex-col'>
-                  <h2 className='text-base font-semibold'>Bá Khương</h2>
+                  <h2 className='text-sm font-semibold'>Bá Khương</h2>
                 </div>
               </div>
 
@@ -62,7 +62,7 @@ const ChatSellers = () => {
                     <div className='w-[10px] h-[10px] bg-green-500 rounded-full bottom-0 right-0 absolute'></div>
                   </div>
                   <div className='flex flex-col'>
-                    <h2 className='text-base font-medium text-white'>Đình Cảnh</h2>
+                    <h2 className='text-sm font-medium text-white'>Đình Cảnh</h2>
                   </div>
                 </div>
               }
@@ -78,7 +78,7 @@ const ChatSellers = () => {
                   <div className='flex justify-start items-center gap-2 md:px-3 py-2 max-w-full lg:max-w-[85%]'>
                     <img className='w-[38px] h-38[px] rounded-full border-2 border-white p-[3px] max-w-[38px]' src="/images/admin.jpg" alt="demo" />
                     <div className='flex justify-center items-start flex-col w-full bg-slate-200 text-black px-3 py-1 rounded-lg'>
-                      <span>Bạn có rảnh không? Cho tôi hỏi cái này.</span>
+                      <span className='text-sm'>Bạn có rảnh không? Cho tôi hỏi cái này.</span>
                     </div>
                   </div>
                 </div>
@@ -86,7 +86,7 @@ const ChatSellers = () => {
                 <div className='w-full flex justify-end items-center'>
                   <div className='flex justify-start items-center gap-2 md:px-3 py-2 max-w-full lg:max-w-[85%]'>
                     <div className='flex justify-center items-start flex-col w-full bg-blue-500 text-white px-3 py-1 rounded-lg'>
-                      <span>Tôi có, bạn hỏi đi </span>
+                      <span className='text-sm'>Tôi có, bạn hỏi đi </span>
                     </div>
                     <img className='w-[38px] h-38[px] rounded-full border-2 border-white p-[3px] max-w-[38px]' src="/images/admin.jpg" alt="demo" />
                   </div>
@@ -96,7 +96,7 @@ const ChatSellers = () => {
                   <div className='flex justify-start items-center gap-2 md:px-3 py-2 max-w-full lg:max-w-[85%]'>
                     <img className='w-[38px] h-38[px] rounded-full border-2 border-white p-[3px] max-w-[38px]' src="/images/admin.jpg" alt="demo" />
                     <div className='flex justify-center items-start flex-col w-full bg-slate-200 text-black px-3 py-1 rounded-lg break-words'>
-                      <span>Có thể cho tôi xin nghỉ ngày mai không? </span>
+                      <span className='text-sm'>Có thể cho tôi xin nghỉ ngày mai không? </span>
                     </div>
                   </div>
                 </div>
