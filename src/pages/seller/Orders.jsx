@@ -6,7 +6,8 @@ import { Link } from 'react-router-dom';
 import { FaEdit, FaTrash, FaEye } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
 import { get_sellet_orders } from '../../stores/Reducers/orderReducer';
-import { translateDeliveryStatus, translatePaymentStatus } from './../../utils/translateStatus';
+// import { translateDeliveryStatus, translatePaymentStatus } from './../../utils/translateStatus';
+import StatusBadge from '../../components/StatusBadge';
 const Orders = () => {
   const dispatch = useDispatch();
   const { userInfo } = useSelector(state => state.auth);
@@ -51,12 +52,12 @@ const Orders = () => {
             </thead>
             <tbody>
               {myOrders.map((o, i) =>
-                <tr key={i}>
+                <tr key={i} className='hover:bg-white/10 transition'>
                   <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>MDH - {o._id.slice(-6).toUpperCase()}</td>
                   <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{new Date(o.date).toLocaleDateString('vi-VN')}</td>
                   <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{o.price.toLocaleString('vi-VN')} ₫</td>
-                  <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{translatePaymentStatus(o.payment_status)}</td>
-                  <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{translateDeliveryStatus(o.delivery_status)}</td>
+                  <td scope='row' className='py-3 px-4 whitespace-nowrap'><StatusBadge type="payment" status={o.payment_status} /></td>
+                  <td scope='row' className='py-3 px-4  whitespace-nowrap'><StatusBadge type="delivery" status={o.delivery_status} /></td>
                   <td scope='row' className='py-3 px-4 lg:px-8 font-medium whitespace-nowrap'>
                     <Link to={`/seller/dashboard/orders/${o._id}`} className='inline-block justify-start  items-center mr-4 p-[6px] bg-green-500 rounded-md hover:shadow-lg hover:bg-green-500/50 '><FaEye /></Link>
                   </td>

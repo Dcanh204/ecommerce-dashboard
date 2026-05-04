@@ -10,119 +10,119 @@ import { CgProfile } from "react-icons/cg";
 export const allNav = [
   {
     id: 1,
-    title: 'Dashboard',
+    title: 'Trang chủ',
     icon: <AiOutlineDashboard />,
     role: 'admin',
     path: '/admin/dashboard'
   },
   {
     id: 2,
-    title: 'Orders',
+    title: 'Đơn hàng',
     icon: <AiOutlineShoppingCart />,
     role: 'admin',
     path: '/admin/dashboard/orders'
   },
   {
     id: 3,
-    title: 'Category',
+    title: 'Danh mục',
     icon: <BiCategory />,
     role: 'admin',
     path: '/admin/dashboard/category'
   },
   {
     id: 4,
-    title: 'Sellers',
+    title: 'Người bán',
     icon: <FaUsers />,
     role: 'admin',
     path: '/admin/dashboard/sellers'
   },
   {
     id: 5,
-    title: 'Payment Request',
+    title: 'Yêu cầu rút tiền',
     icon: <MdPayment />,
     role: 'admin',
     path: '/admin/dashboard/payment-request'
   },
   {
     id: 6,
-    title: 'Deactive Sellers',
+    title: 'Vô hiệu hóa',
     icon: <FaUserTimes />,
     role: 'admin',
     path: '/admin/dashboard/deactive-sellers'
   },
   {
     id: 7,
-    title: 'Sellers Request',
+    title: 'Yêu cầu người bán',
     icon: <FaCodePullRequest />,
     role: 'admin',
     path: '/admin/dashboard/sellers-request'
   },
   {
     id: 8,
-    title: 'Live Chat',
+    title: 'Nhắn tin',
     icon: <IoIosChatbubbles />,
     role: 'admin',
     path: '/admin/dashboard/chat-seller'
   },
   {
     id: 9,
-    title: 'Dashboard',
+    title: 'Trang chủ',
     icon: <IoIosChatbubbles />,
     role: 'seller',
     path: '/seller/dashboard'
   },
   {
     id: 10,
-    title: 'Add Product',
+    title: 'Thêm sản phẩm',
     icon: <IoMdAdd />,
     role: 'seller',
     path: '/seller/dashboard/add-product'
   },
   {
     id: 11,
-    title: 'All Product',
+    title: 'Tất cả sản phẩm',
     icon: <LuClipboardList />,
     role: 'seller',
     path: '/seller/dashboard/products'
   },
   {
     id: 12,
-    title: 'Discount Product',
+    title: 'Giảm giá',
     icon: <MdOutlineDiscount />,
     role: 'seller',
     path: '/seller/dashboard/discount-product'
   },
   {
     id: 13,
-    title: 'Orders',
+    title: 'Đơn hàng',
     icon: <AiOutlineShoppingCart />,
     role: 'seller',
     path: '/seller/dashboard/orders'
   },
   {
     id: 14,
-    title: 'Payments',
+    title: 'Thanh toán',
     icon: <MdPayment />,
     role: 'seller',
     path: '/seller/dashboard/payments'
   },
   {
     id: 15,
-    title: 'Chat Customer',
+    title: 'Nhắn tin',
     icon: <IoIosChatbubbles />,
     role: 'seller',
     path: '/seller/dashboard/chat-customer'
   },
   {
     id: 16,
-    title: 'Chat Support',
+    title: 'Hỗ trợ',
     icon: <IoChatbubbleEllipsesOutline />,
     role: 'seller',
     path: '/seller/dashboard/chat-support'
   },
   {
     id: 17,
-    title: 'Profile',
+    title: 'Thông tin tài khoản',
     icon: <CgProfile />,
     role: 'seller',
     path: '/seller/dashboard/profile'

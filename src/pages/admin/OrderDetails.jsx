@@ -90,7 +90,6 @@ const OrderDetails = () => {
                   <h2 className='font-medium  text-xl text-[#d0d2d6]'>Đơn hàng theo người bán</h2>
                   <select className='px-4 py-2 focus:border-indigo-500 outline-none bg-[#475569] border border-slate-700 rounded-md text-sm text-[#d0d2d6]' value={status} onChange={status_update}>
                     <option value="pending">Chờ xử lý</option>
-                    <option value="processing">Đang xử lý</option>
                     <option value="shipped">Đang giao</option>
                     <option value="delivered">Đã giao</option>
                     <option value="cancelled">Đã hủy</option>

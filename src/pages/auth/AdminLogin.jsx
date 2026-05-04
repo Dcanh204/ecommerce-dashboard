@@ -48,18 +48,18 @@ const AdminLogin = () => {
             </div>
           </div>
           <form onSubmit={submitHandle}>
-            <div className="flex flex-col w-full gap-1 mb-3">
+            <div className="flex flex-col w-full gap-1 mb-3 text-sm">
               <label htmlFor="email">Email</label>
               <input onChange={inputHandle} value={state.email} className="px-3 py-2 outline-none border border-slate-400 bg-transparent rounded-md" type="email" name="email" id="email" placeholder="Email" required />
             </div>
 
-            <div className="flex flex-col w-full gap-1 mb-3">
-              <label htmlFor="password">Password</label>
+            <div className="flex flex-col w-full gap-1 mb-3 text-sm">
+              <label htmlFor="password">Mật khẩu</label>
               <input onChange={inputHandle} value={state.password} className="px-3 py-2 outline-none border border-slate-400 bg-transparent rounded-md" type="password" name="password" id="password" placeholder="Password" required />
             </div>
 
             <button disabled={loading} className="bg-slate-800 w-full hover:shadow-blue-300 hover:shadow-lg text-white rounded-md px-7 py-2 mb-3 cursor-pointer">
-              {loading ? <ClipLoader color='white' /> : 'Sign In'}
+              {loading ? <ClipLoader color='white' /> : 'Đăng nhập'}
             </button>
           </form>
         </div>

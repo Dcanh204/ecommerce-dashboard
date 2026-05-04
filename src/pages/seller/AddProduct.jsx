@@ -137,24 +137,24 @@ const AddProduct = () => {
       <div className='w-full p-4 bg-[#6a5fdf] rounded-md'>
         <div className='flex justify-between items-center pb-4'>
           <h2 className='font-semibold text-[#d0d2d6] text-xl'>Thêm sản phẩm</h2>
-          <Link to='/seller/dashboard/products' className='bg-blue-500 shadow-blue-500/50 hover:shadow-lg rounded-md text-white px-7 py-2'>Tất cả sản phẩm</Link>
+          <Link to='/seller/dashboard/products' className='bg-blue-500 shadow-blue-500/50 hover:shadow-lg rounded-md text-white px-7 py-2 text-sm'>Tất cả sản phẩm</Link>
         </div>
 
         <div>
           <form onSubmit={add_product}>
             <div className='w-full flex flex-col md:flex-row gap-4 text-[#d0d2d6] mb-3'>
-              <div className='flex flex-col w-full gap-1'>
+              <div className='flex flex-col w-full gap-1 text-sm'>
                 <label htmlFor="name">Tên sản phẩm</label>
                 <input onChange={inputHandle} value={state.name} className='px-3 py-1 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="text" name='name' id='name' placeholder='Nhập tên sản phẩm' />
               </div>
-              <div className='flex flex-col w-full gap-1'>
+              <div className='flex flex-col w-full gap-1 text-sm'>
                 <label htmlFor="brand">Tên thương hiệu</label>
                 <input onChange={inputHandle} value={state.brand} className='px-3 py-1 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="text" name='brand' id='brand' placeholder='Nhập tên thương hiệu' />
               </div>
             </div>
 
             <div className='w-full flex flex-col md:flex-row gap-4 text-[#d0d2d6] mb-3'>
-              <div className='flex flex-col w-full gap-1 relative'>
+              <div className='flex flex-col w-full gap-1 relative text-sm'>
                 <label htmlFor="category">Danh mục</label>
                 <input onClick={() => setCateShow(!cateShow)} value={category} readOnly className='px-3 py-1 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="text" name='category' id='category' placeholder='-- Chọn danh mục --' />
                 <div className={`absolute z-20 top-[101%] w-full bg-[#475569] transition-all ${cateShow ? 'scale-100' : 'scale-0'} duration-300`}>
@@ -176,24 +176,24 @@ const AddProduct = () => {
 
                 </div>
               </div>
-              <div className='flex flex-col w-full gap-1'>
+              <div className='flex flex-col w-full gap-1 text-sm'>
                 <label htmlFor="stock">Số lượng sản phẩm</label>
                 <input min={0} onChange={inputHandle} value={state.stock} className='px-3 py-1 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="text" name='stock' id='stock' placeholder='Nhập số lượng sản phẩm' />
               </div>
             </div>
 
             <div className='w-full flex flex-col md:flex-row gap-4 text-[#d0d2d6] mb-3'>
-              <div className='flex flex-col w-full gap-1'>
+              <div className='flex flex-col w-full gap-1 text-sm'>
                 <label htmlFor="price">Giá</label>
                 <input min={0} onChange={inputHandle} value={state.price} className='px-3 py-1 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="number" name='price' id='price' placeholder='Nhập giá sản phẩm' />
               </div>
-              <div className='flex flex-col w-full gap-1'>
+              <div className='flex flex-col w-full gap-1 text-sm'>
                 <label htmlFor="discount">Giảm giá</label>
                 <input min={0} onChange={inputHandle} value={state.discount} className='px-3 py-1 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="number" name='discount' id='discount' placeholder='% Nhập phần trăm giảm giá' />
               </div>
             </div>
 
-            <div className='flex flex-col w-full gap-1 text-[#d0d2d6] mb-5'>
+            <div className='flex flex-col w-full gap-1 text-[#d0d2d6] mb-5 text-sm'>
               <label htmlFor="description">Mô tả</label>
               <textarea onChange={inputHandle} value={state.description} className='px-3 py-1 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="type" name='description' id='description' placeholder='Nhập mô tả' cols={10} rows={3} />
             </div>
@@ -210,12 +210,12 @@ const AddProduct = () => {
               }
               <label htmlFor="image" className='flex flex-col justify-center items-center h-[190px] border border-dashed cursor-pointer hover:border-red-500 w-full text-[#d0d2d6]'>
                 <span><IoMdImages /></span>
-                <span>Chọn ảnh</span>
+                <span className='text-sm'>Chọn ảnh</span>
               </label>
               <input onChange={imageHandle} className='hidden' type="file" multiple id='image' />
             </div>
             <div className='flex justify-center md:justify-start '>
-              <button disabled={loading} className='bg-red-500 shadow-red-500/50 hover:shadow-lg rounded-lg text-white px-7 py-3 my-3 w-[200px] '>
+              <button disabled={loading} className='bg-red-500 shadow-red-500/50 hover:shadow-lg rounded-lg text-white px-3 py-2 my-3 w-[200px] text-sm '>
                 {
                   loading ? <ClipLoader color='white' size={25} /> : 'Thêm sản phẩm'
                 }

@@ -42,7 +42,7 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
                 <li key={index}>
                   <Link to={item.path} className={`${pathname === item.path ? 'bg-blue-600 text-white shadow-indigo-500/50 duration-500 ' : 'text-[#030811] font-bold duration-200'} flex justify-start items-center px-[12px] py-[9px] gap-[12px] w-full mb-1 hover:pl-4 transition-all rounded-sm text-sm`}>
                     <span>{item.icon}</span>
-                    <span>{item.title}</span>
+                    <span className='text-xs'>{item.title}</span>
                   </Link>
                 </li>
               )
@@ -51,7 +51,7 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
             <li>
               <button onClick={() => dispatch(logout({ navigate, role }))} className='text-[#030811] font-bold duration-200 flex justify-start items-center px-[12px] py-[9px] gap-[12px] w-full mb-1 hover:pl-4 transition-all rounded-sm text-sm cursor-pointer'>
                 <span><BiLogOutCircle /></span>
-                <span>Logout</span>
+                <span className='text-xs'>Đăng xuất</span>
               </button>
             </li>
           </ul>
