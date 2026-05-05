@@ -5,6 +5,7 @@ import { BiLogOutCircle } from "react-icons/bi";
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, messageClear } from '../stores/Reducers/authReducer';
 import toast from 'react-hot-toast';
+import { socket } from '../utils/socket';
 const Sidebar = ({ showSidebar, setShowSidebar }) => {
   const { successMessage } = useSelector(state => state.auth)
   const dispatch = useDispatch();
@@ -49,7 +50,10 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
             })}
 
             <li>
-              <button onClick={() => dispatch(logout({ navigate, role }))} className='text-[#030811] font-bold duration-200 flex justify-start items-center px-[12px] py-[9px] gap-[12px] w-full mb-1 hover:pl-4 transition-all rounded-sm text-sm cursor-pointer'>
+              <button onClick={() => {
+                socket.disconnect();
+                dispatch(logout({ navigate, role }))
+              }} className='text-[#030811] font-bold duration-200 flex justify-start items-center px-[12px] py-[9px] gap-[12px] w-full mb-1 hover:pl-4 transition-all rounded-sm text-sm cursor-pointer'>
                 <span><BiLogOutCircle /></span>
                 <span className='text-xs'>Đăng xuất</span>
               </button>
@@ -57,7 +61,7 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
           </ul>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
