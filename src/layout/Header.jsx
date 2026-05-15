@@ -20,7 +20,7 @@ const Header = ({ showSidebar, setShowSidebar }) => {
 
         <div className='flex justify-center items-center gap-3'>
           <div className='flex flex-col text-end'>
-            <h2 className='text-xs font-bold'>{userInfo.name}</h2>
+            <h2 className='text-xs font-bold capitalize'>{userInfo.name}</h2>
             <span className='text-[10px] w-full'>{rolelabel[role]}</span>
           </div>
           <img className='w-[45px] h-[45px] rounded-full overflow-hidden' src="/images/admin.jpg" alt="" />

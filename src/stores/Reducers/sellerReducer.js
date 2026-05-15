@@ -57,16 +57,26 @@ const sellerReducer = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(get_seller_request.pending, (state) => {
+        state.loading = true;
+      })
       .addCase(get_seller_request.fulfilled, (state, action) => {
+        state.loading = false;
         state.sellers = action.payload?.sellers;
         state.totalSellers = action.payload?.totalSellers;
+      })
+      .addCase(get_seller_request.rejected, (state) => {
+        state.loading = false;
       })
 
       .addCase(getSellerById.fulfilled, (state, action) => {
         state.seller = action.payload?.seller;
       })
-      .addCase(updateStatus.rejected, (state) => {
+      .addCase(updateStatus.pending, (state) => {
         state.loading = true;
+      })
+      .addCase(updateStatus.rejected, (state) => {
+        state.loading = false;
       })
       .addCase(updateStatus.fulfilled, (state, action) => {
         state.loading = false;

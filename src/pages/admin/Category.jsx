@@ -184,7 +184,7 @@ const Category = () => {
               <form onSubmit={addOrUpdateCategory}>
                 <div className='flex flex-col w-full gap-1 mb-3'>
                   <label htmlFor="name">Tên danh mục</label>
-                  <input value={state.category_name} onChange={inputHandle} className='px-3 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="text" id='name' name='category_name' placeholder='Tên danh mục' />
+                  <input value={state.category_name} onChange={inputHandle} className='px-3 py-1 text-sm border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="text" id='name' name='category_name' placeholder='Tên danh mục' />
                 </div>
 
                 <div>

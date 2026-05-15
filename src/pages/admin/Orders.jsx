@@ -6,6 +6,7 @@ import { FaEye } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
 import { get_admin_orders } from '../../stores/Reducers/orderReducer';
 import { translateDeliveryStatus, translatePaymentStatus } from './../../utils/translateStatus';
+import StatusBadge from '../../components/StatusBadge';
 const Orders = () => {
   const dispatch = useDispatch();
   const { myOrders, totalOrders } = useSelector(state => state.order);
@@ -74,8 +75,8 @@ const Orders = () => {
                     <td className='px-4 py-2'>
                       {o.price.toLocaleString('vi-VN')} ₫
                     </td>
-                    <td className='px-4 py-2'>{translatePaymentStatus(o.payment_status)}</td>
-                    <td className='px-4 py-2'>{translateDeliveryStatus(o.delivery_status)}</td>
+                    <td className='px-4 py-2'><StatusBadge type="payment" status={o.payment_status} /></td>
+                    <td className='px-4 py-2'><StatusBadge type="delivery" status={o.delivery_status} /></td>
                     <td className='px-4 py-2 lg:px-10'>
                       <Link
                         to={`/admin/dashboard/orders/${o._id}`}

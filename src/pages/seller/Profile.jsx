@@ -159,39 +159,83 @@ const Profile = () => {
               <h2 className='font-medium text-xl text-[#d0d2d6] mb-4'>Thay đổi mật khẩu</h2>
               <form>
                 <div className='flex flex-col w-full gap-1 mb-3 text-sm'>
-                  <label htmlFor="email">Email</label>
-                  <input className='px-3 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="email" name='email' id='email' placeholder='Nhập email' />
+                  <label className='text-sm' htmlFor="email">Email</label>
+                  <input className='px-2 py-1 text-sm border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type="email" name='email' id='email' placeholder='Nhập email' />
                 </div>
                 <div className='flex flex-col w-full gap-1 mb-3 relative'>
-                  <label htmlFor="oldPassword">Mật khẩu cũ</label>
-                  <input className='pl-2 pr-14 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type={showOldPassword ? 'text' : 'password'} name='oldPassword' id='oldPassword' placeholder='Nhập mật khẩu cũ' />
-                  {
-                    showOldPassword ? <span onClick={() => setShowOldPassword(!showOldPassword)} className='flex justify-center items-center absolute z-10 top-10 right-5 cursor-pointer'><FaEyeSlash /></span>
-                      :
-                      <span onClick={() => setShowOldPassword(!showOldPassword)} className='flex justify-center items-center absolute top-10 right-5 z-10 cursor-pointer'><FaEye /></span>
-                  }
+                  <label className='text-sm' htmlFor="oldPassword">
+                    Mật khẩu cũ
+                  </label>
 
+                  <input
+                    className='text-sm pl-2 pr-14 py-1 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent'
+                    type={showOldPassword ? 'text' : 'password'}
+                    name='oldPassword'
+                    id='oldPassword'
+                    placeholder='Nhập mật khẩu cũ'
+                  />
+
+                  <span
+                    onClick={() => setShowOldPassword(!showOldPassword)}
+                    className='absolute right-4 top-[70%] -translate-y-1/2 cursor-pointer flex items-center justify-center'
+                  >
+                    {
+                      showOldPassword
+                        ? <FaEyeSlash size={12} />
+                        : <FaEye size={12} />
+                    }
+                  </span>
                 </div>
                 <div className='flex flex-col w-full gap-1 mb-3 relative'>
-                  <label htmlFor="newPassword">Mật khẩu mới</label>
-                  <input className='pl-2 pr-14 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type={showNewPassword ? 'text' : 'password'} name='newPassword' id='newPassword' placeholder='Nhập mật khẩu mới' />
-                  {
-                    showNewPassword ? <span onClick={() => setShowNewPassword(!showNewPassword)} className='flex justify-center items-center absolute z-10 top-10 right-5 cursor-pointer'><FaEyeSlash /></span>
-                      :
-                      <span onClick={() => setShowNewPassword(!showNewPassword)} className='flex justify-center items-center absolute top-10 right-5 z-10 cursor-pointer'><FaEye /></span>
-                  }
+                  <label className='text-sm' htmlFor="newPassword">
+                    Mật khẩu mới
+                  </label>
+
+                  <input
+                    className='text-sm pl-2 pr-10 py-1 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent'
+                    type={showNewPassword ? 'text' : 'password'}
+                    name='newPassword'
+                    id='newPassword'
+                    placeholder='Nhập mật khẩu mới'
+                  />
+
+                  <span
+                    onClick={() => setShowNewPassword(!showNewPassword)}
+                    className='absolute right-4 top-[70%] -translate-y-1/2 cursor-pointer flex items-center justify-center'
+                  >
+                    {
+                      showNewPassword
+                        ? <FaEyeSlash size={12} />
+                        : <FaEye size={12} />
+                    }
+                  </span>
                 </div>
                 <div className='flex flex-col w-full gap-1 mb-3 relative'>
-                  <label htmlFor="confirmNewWord">Nhập lại mật khẩu mới</label>
-                  <input className='pl-2 pr-14 py-2 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent' type={showConfirmPassword ? 'text' : 'password'} name='confirmNewWord' id='confirmNewWord' placeholder='Nhập lại mật khẩu mới' />
-                  {
-                    showConfirmPassword ? <span onClick={() => setShowConfirmPassword(!showConfirmPassword)} className='flex justify-center items-center absolute z-10 top-10 right-5 cursor-pointer'><FaEyeSlash /></span>
-                      :
-                      <span onClick={() => setShowConfirmPassword(!showConfirmPassword)} className='flex justify-center items-center absolute z-10 top-10 right-5 cursor-pointer'><FaEye /></span>
-                  }
+                  <label className='text-sm' htmlFor="confirmNewWord">
+                    Nhập lại mật khẩu mới
+                  </label>
+
+                  <input
+                    className='text-sm pl-2 pr-10 py-1 border border-slate-700 rounded-md outline-none focus:border-indigo-400 bg-transparent'
+                    type={showConfirmPassword ? 'text' : 'password'}
+                    name='confirmNewWord'
+                    id='confirmNewWord'
+                    placeholder='Nhập lại mật khẩu mới'
+                  />
+
+                  <span
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className='absolute right-4 top-[70%] -translate-y-1/2 cursor-pointer flex items-center justify-center z-10'
+                  >
+                    {
+                      showConfirmPassword
+                        ? <FaEyeSlash size={12} />
+                        : <FaEye size={12} />
+                    }
+                  </span>
                 </div>
                 <div>
-                  <button className='bg-red-500 shadow-red-500/50 hover:shadow-lg rounded-lg text-white px-7 py-2 '>Cập nhật</button>
+                  <button className='bg-red-500 shadow-red-500/50 hover:shadow-lg rounded-lg text-white px-5 py-1 '>Cập nhật</button>
                 </div>
               </form>
             </div>

@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { CiImageOff } from "react-icons/ci";
 import toast from 'react-hot-toast';
 import { ClipLoader } from 'react-spinners';
+import StatusBadge from '../../components/StatusBadge';
 const SellerDetails = () => {
 
   const dispatch = useDispatch();
@@ -70,7 +71,7 @@ const SellerDetails = () => {
                 </div>
                 <div className='flex gap-2 text-black'>
                   <span className='font-bold'>Trạng thái: </span>
-                  <span className='capitalize'>{seller?.status}</span>
+                  <span className='capitalize'><StatusBadge type="user" status={seller?.status} /></span>
                 </div>
                 <div className='flex gap-2  text-black'>
                   <span className='font-bold'>Trạng thái thanh toán: </span>
@@ -104,13 +105,13 @@ const SellerDetails = () => {
         </div>
 
         <form onSubmit={update_status}>
-          <div className='flex gap-4 py-3'>
-            <select value={status} onChange={(e) => setStatus(e.target.value)} className='px-3 py-2 border border-slate-700 outline-none rounded-md hover:border-indigo-400 text-[#d0d2d6] bg-[#6a5fdf]' name="" id="">
+          <div className='flex gap-4 py-2'>
+            <select value={status} onChange={(e) => setStatus(e.target.value)} className='px-2 py-1 text-xs border border-slate-700 outline-none rounded-md hover:border-indigo-400 text-[#d0d2d6] bg-[#6a5fdf]' name="" id="">
               <option value="">--Chọn trạng thái--</option>
-              <option value="active">Active</option>
-              <option value="deactive">Deactive</option>
+              <option value="active">Hoạt động</option>
+              <option value="deactive">Vô hiệu hóa</option>
             </select>
-            <button disabled={loading} className='bg-red-500 w-[170px] hover:shadow-red-500/40 hover:shadow-md text-white rounded-md px-7 py-2'>
+            <button disabled={loading} className='bg-red-500 max-w-[170px] hover:shadow-red-500/40 hover:shadow-md text-white rounded-md px-3 py-1'>
               {
                 loading ? <ClipLoader color='white' /> : 'Cập nhật'
               }

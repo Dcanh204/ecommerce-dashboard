@@ -89,6 +89,7 @@ const ChatCustomers = () => {
   useEffect(() => {
     socket.emit('request_active');
   }, []);
+
   return (
     <div className='px-2 lg:px-7 py-5'>
       <div className='w-full p-4 bg-[#6a5fdf] rounded-md h-[calc(100vh-140px)]'>
@@ -127,7 +128,7 @@ const ChatCustomers = () => {
           <div className='w-full md:w-[calc(100%-280px)] md:pl-4'>
             <div className='flex justify-between items-center'>
               {
-                currentCustomer && <div className='flex justify-start items-center gap-3'>
+                Object.keys(currentCustomer || {}).length > 0 && <div className='flex justify-start items-center gap-3'>
                   <div className='relative'>
                     <img className='h-[38px] w-[38px] rounded-full border-2 p-[2px] border-green-300' src="/images/admin.jpg" alt="seller" />
                     {
@@ -259,6 +260,7 @@ const ChatCustomers = () => {
             </div>
 
             <form className='flex gap-3' onSubmit={sendMessage} >
+
               <input value={text} onChange={(e) => setText(e.target.value)} className='w-full border border-slate-600 px-3 py-[5px] focus:border-blue-500 rounded-md outline-none bg-transparent text-[#d0d2d6]' type="text" placeholder='Aa' />
               <button className='w-[75px] h-[35px] bg-[#06b6d4]  shadow-cyan-500/50 hover:shadow-lg font-semibold rounded-md text-white'>Gửi</button>
             </form>

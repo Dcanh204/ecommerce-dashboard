@@ -28,7 +28,6 @@ export const get_customer_messages = createAsyncThunk(
 export const send_message = createAsyncThunk(
   'chat/send_message',
   async (info, { rejectWithValue }) => {
-    console.log(info)
     try {
       const { data } = await api.post(`/chat/seller/send-message`, info, { withCredentials: true });
       return data;

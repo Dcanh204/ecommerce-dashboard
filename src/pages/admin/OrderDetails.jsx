@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { admin_order_status_update, get_admin_order, messageClear } from '../../stores/Reducers/orderReducer';
 import toast from 'react-hot-toast';
-import { translateDeliveryStatus } from './../../utils/translateStatus';
+import StatusBadge from '../../components/StatusBadge';
 
 const OrderDetails = () => {
   const orderId = useParams().id;
@@ -54,7 +54,7 @@ const OrderDetails = () => {
 
                 <div className="flex justify-between p-1 text-sm">
                   <span className="font-medium">Trạng thái:</span>
-                  <span>{order?.payment_status}</span>
+                  <StatusBadge type="payment" status={order?.payment_status} />
                 </div>
 
                 <div className='flex justify-between p-1 text-sm'>
@@ -69,7 +69,9 @@ const OrderDetails = () => {
                     <img className='w-[50px] h-[50px]' src={item.images[0]} alt="" />
                     <div className='w-full flex justify-between items-center text-[#d0d2d6]'>
                       <div className='flex flex-col gap-1 text-xs'>
-                        <h2>{item.name}</h2>
+                        <h2 className='max-w-[200px] truncate'>
+                          {item.name}
+                        </h2>
                         <span>{item.brand}</span>
                       </div>
                       <div className='flex items-center text-xs'>
@@ -88,7 +90,7 @@ const OrderDetails = () => {
               <div className='p-5 border border-slate-200 rounded-md shadow-md'>
                 <div className='flex justify-between items-center'>
                   <h2 className='font-medium  text-xl text-[#d0d2d6]'>Đơn hàng theo người bán</h2>
-                  <select className='px-4 py-2 focus:border-indigo-500 outline-none bg-[#475569] border border-slate-700 rounded-md text-sm text-[#d0d2d6]' value={status} onChange={status_update}>
+                  <select className='px-3 py-1 focus:border-indigo-500 outline-none bg-[#475569] border border-slate-700 rounded-md text-sm text-[#d0d2d6]' value={status} onChange={status_update}>
                     <option value="pending">Chờ xử lý</option>
                     <option value="shipped">Đang giao</option>
                     <option value="delivered">Đã giao</option>
@@ -113,11 +115,11 @@ const OrderDetails = () => {
                           <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>
                             <img className='w-[50px] h-[50px]' src={item.images[0]} alt="" />
                           </td>
-                          <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{item.name}</td>
+                          <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap max-w-[200px] truncate'>{item.name}</td>
                           <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{item.brand}</td>
                           <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{item.quantity}</td>
                           <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>Dinhcanh</td>
-                          <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{translateDeliveryStatus(order.delivery_status)}</td>
+                          <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'><StatusBadge type="delivery" status={order?.delivery_status} /></td>
                         </tr>
                       )}
                     </tbody>

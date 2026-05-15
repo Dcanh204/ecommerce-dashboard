@@ -39,8 +39,8 @@ export const admin_order_status_update = createAsyncThunk(
     }
   }
 )
-export const get_sellet_orders = createAsyncThunk(
-  'order/get_sellet_orders',
+export const get_seller_orders = createAsyncThunk(
+  'order/get_seller_orders',
   async ({ parPage, page, searchValue, sellerId }, { rejectWithValue }) => {
     try {
       const { data } = await api.get(`/order/seller/orders/${sellerId}?page=${page}&searchValue=${searchValue}&parPage=${parPage}`, { withCredentials: true });
@@ -49,6 +49,29 @@ export const get_sellet_orders = createAsyncThunk(
       return rejectWithValue(error.response.data);
     }
 
+  }
+)
+export const get_seller_order = createAsyncThunk(
+  'order/get_seller_order',
+  async (orderId, { rejectWithValue }) => {
+    try {
+      const { data } = await api.get(`/order/seller/order/${orderId}`, { withCredentials: true });
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+)
+
+export const seller_order_status_update = createAsyncThunk(
+  'order/seller_order_status_update',
+  async ({ orderId, info }, { rejectWithValue }) => {
+    try {
+      const { data } = await api.put(`/order/seller/order-status/update/${orderId}`, info, { withCredentials: true });
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
   }
 )
 const orderReducer = createSlice({
@@ -80,9 +103,16 @@ const orderReducer = createSlice({
         state.successMessage = action.payload?.message;
       })
 
-      .addCase(get_sellet_orders.fulfilled, (state, action) => {
+      .addCase(get_seller_orders.fulfilled, (state, action) => {
         state.myOrders = action.payload?.orders;
         state.totalOrders = action.payload?.totalOrders
+      })
+
+      .addCase(get_seller_order.fulfilled, (state, action) => {
+        state.order = action.payload?.order
+      })
+      .addCase(seller_order_status_update.fulfilled, (state, action) => {
+        state.successMessage = action.payload?.message;
       })
   }
 });

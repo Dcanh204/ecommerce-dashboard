@@ -5,7 +5,7 @@ import Pagination from '../../components/Pagination';
 import { Link } from 'react-router-dom';
 import { FaEdit, FaTrash, FaEye } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
-import { get_sellet_orders } from '../../stores/Reducers/orderReducer';
+import { get_seller_orders } from '../../stores/Reducers/orderReducer';
 // import { translateDeliveryStatus, translatePaymentStatus } from './../../utils/translateStatus';
 import StatusBadge from '../../components/StatusBadge';
 const Orders = () => {
@@ -31,7 +31,7 @@ const Orders = () => {
       searchValue: debouncedSearch,
       sellerId: userInfo._id
     }
-    dispatch(get_sellet_orders(obj))
+    dispatch(get_seller_orders(obj))
   }, [currentPage, dispatch, debouncedSearch, parPage, userInfo])
   return (
     <div className='px-2 lg:px-7 pt-5'>

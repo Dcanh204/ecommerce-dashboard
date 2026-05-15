@@ -5,9 +5,10 @@ import { FaEye } from "react-icons/fa";
 import Search from './../../components/Search';
 import { useDispatch, useSelector } from 'react-redux';
 import { get_seller_request } from '../../stores/Reducers/sellerReducer';
+import { ClipLoader } from 'react-spinners';
 const SellerRequest = () => {
   const dispatch = useDispatch();
-  const { sellers, totalSellers } = useSelector(state => state.seller);
+  const { sellers, totalSellers, loading } = useSelector(state => state.seller);
 
   const [currentPage, setCurrentPage] = useState(1)
   const [parPage, setParPage] = useState(5);
@@ -52,7 +53,15 @@ const SellerRequest = () => {
               </tr>
             </thead>
             <tbody>
-              {sellers.map((item, index) =>
+              {loading ? (
+                <tr>
+                  <td colSpan="6" className="py-10">
+                    <div className="flex justify-center items-center w-full">
+                      <ClipLoader color="#d0d2d6" />
+                    </div>
+                  </td>
+                </tr>
+              ) : (sellers.map((item, index) =>
                 <tr className='border-b border-slate-700' key={index}>
                   <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{index + 1}</td>
                   <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{item?.name}</td>
@@ -63,7 +72,7 @@ const SellerRequest = () => {
                     <Link to={`/admin/dashboard/sellers/${item._id}`} className='inline-block p-[6px] bg-green-500 rounded-md hover:shadow-lg hover:bg-green-400/50 '><FaEye /></Link>
                   </td>
                 </tr>
-              )}
+              ))}
             </tbody>
           </table>
         </div>
