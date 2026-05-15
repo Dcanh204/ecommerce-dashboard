@@ -1,13 +1,38 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Search from '../../components/Search';
 import Pagination from '../../components/Pagination';
 import { Link } from 'react-router-dom';
 import { FaEdit, FaTrash, FaEye } from "react-icons/fa";
+import { useDispatch, useSelector } from 'react-redux';
+import { getProduct } from '../../stores/Reducers/productReducer';
+import { ClipLoader } from 'react-spinners';
 const DiscountProduct = () => {
+  const dispatch = useDispatch();
+  const { products, totalProduct, loading } = useSelector(state => state.product);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState('');
+  const [debouncedSearch, setDebouncedSearch] = useState(searchValue);
   const [parPage, setParPage] = useState(5);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(searchValue)
+    }, 500)
+    return () => clearTimeout(handler)
+  }, [searchValue])
+
+  useEffect(() => {
+    const obj = {
+      parPage,
+      page: currentPage,
+      searchValue: debouncedSearch,
+      discount: true
+    }
+    dispatch(getProduct(obj))
+  }, [debouncedSearch, parPage, currentPage, dispatch])
+
+
   return (
     <div className='px-2 lg:px-7 pt-5'>
       <h1 className='text-[#000000] font-semibold text-xl mb-3'>Tất cả sản phẩm</h1>
@@ -29,37 +54,47 @@ const DiscountProduct = () => {
               </tr>
             </thead>
             <tbody>
-              {[1, 2, 3, 4, 5].map((item, index) =>
-                <tr key={index}>
-                  <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{item}</td>
-                  <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>
-                    <img className='w-[50px] h-[50px]' src={`/images/category/${item}.jpg`} alt="category" />
+              {loading ? (
+                <tr>
+                  <td colSpan="9" className="py-10">
+                    <div className="flex justify-center items-center w-full">
+                      <ClipLoader color="#d0d2d6" />
+                    </div>
                   </td>
-                  <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>Giày thể thao</td>
-                  <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>Giày</td>
-                  <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>Adidas</td>
-                  <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>500.000đ</td>
-                  <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>10%</td>
-                  <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>36</td>
+                </tr>
+              ) : (products?.map((item, index) =>
+                <tr key={item._id}>
+                  <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{index + 1}</td>
+                  <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>
+                    <img className='w-[50px] h-[50px]' src={item.images[0]} alt={item.name} />
+                  </td>
+                  <td title={item.name} scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>
+                    {item.name.length > 20 ? item.name.slice(0, 20) + '...' : item.name}
+                  </td>
+                  <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{item.category}</td>
+                  <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{item.brand}</td>
+                  <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{Number(item.price).toLocaleString('vi-VN')} đ</td>
+                  <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{item.discount}%</td>
+                  <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{item.stock}</td>
                   <td scope='row' className='py-3 px-4 lg:px-8 font-medium whitespace-nowrap'>
-                    <Link className='inline-block justify-start  items-center mr-4 p-[6px] bg-yellow-500 rounded-md hover:shadow-lg hover:bg-yellow-500/50 '><FaEdit /></Link>
+                    <Link to={`/seller/dashboard/products/edit/${item._id}`} className='inline-block justify-start  items-center mr-4 p-[6px] bg-yellow-500 rounded-md hover:shadow-lg hover:bg-yellow-500/50 '><FaEdit /></Link>
                     <Link className='inline-block justify-start  items-center mr-4 p-[6px] bg-green-500 rounded-md hover:shadow-lg hover:bg-green-500/50 '><FaEye /></Link>
                     <Link className='inline-block justify-start  items-center p-[6px] bg-red-500 rounded-md hover:shadow-lg hover:bg-red-500/50 '><FaTrash /></Link>
                   </td>
                 </tr>
-              )}
+              ))}
             </tbody>
           </table>
         </div>
-        <div className='w-full flex justify-end mt-2'>
+        {totalProduct > parPage && <div className='w-full flex justify-end mt-2'>
           <Pagination
             pageNumber={currentPage}
             setPageNumber={setCurrentPage}
-            totalItem={50}
+            totalItem={totalProduct}
             parPage={parPage}
             showItem={3}
           />
-        </div>
+        </div>}
       </div>
     </div>
   );

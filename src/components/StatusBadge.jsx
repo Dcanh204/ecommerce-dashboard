@@ -112,13 +112,45 @@ const StatusBadge = ({ type, status }) => {
           };
       }
     }
+    // PAYMENT ACCOUNT
+    if (type === "payment_account") {
+      switch (status) {
+
+        case "active":
+          return {
+            text: "Đã liên kết",
+            color: "bg-green-100 text-green-700",
+            icon: <FaCheckCircle size={10} />
+          };
+
+        case "inactive":
+          return {
+            text: "Chưa liên kết",
+            color: "bg-blue-100 text-blue-700",
+            icon: <FaClock size={10} />
+          };
+
+        case "blocked":
+          return {
+            text: "Bị khóa",
+            color: "bg-red-100 text-red-700",
+            icon: <FaTimesCircle size={10} />
+          };
+
+        default:
+          return {
+            text: status,
+            color: "bg-gray-100 text-gray-700"
+          };
+      }
+    }
   };
 
   const { text, color, icon } = getConfig();
 
   return (
     <span
-      className={`inline-flex items-center gap-1 px-2 py-1 text-[10px] font-medium rounded ${color}`}
+      className={`inline-flex items-center gap-1 px-2 py-1 text-[10px] font-medium cursor-pointer rounded ${color}`}
     >
       {icon && icon}
       {text}

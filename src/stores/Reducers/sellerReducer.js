@@ -37,7 +37,30 @@ export const updateStatus = createAsyncThunk(
     }
   }
 )
+export const create_stripe_connect_account = createAsyncThunk(
+  'seller/create_stripe_connect_account',
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await api.get(`/payment/create-stripe-connect-account`, { withCredentials: true })
+      window.location.href = data.url;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+)
 
+export const active_stripe_connect_account = createAsyncThunk(
+  'seller/active_stripe_connect_account',
+  async (activeCode, { rejectWithValue }) => {
+    try {
+      const { data } = await api.put(`/payment/active-stripe-connect-account/${activeCode}`, {}, { withCredentials: true })
+      return data
+    } catch (error) {
+      // console.log(error.response.data) 
+      return rejectWithValue(error.response.data)
+    }
+  }
+)
 
 const sellerReducer = createSlice({
   name: 'seller',
@@ -47,7 +70,8 @@ const sellerReducer = createSlice({
     loading: false,
     sellers: [],
     seller: {},
-    totalSellers: 0
+    totalSellers: 0,
+    loader: false
   },
   reducers: {
     messageClear: (state) => {
@@ -82,6 +106,28 @@ const sellerReducer = createSlice({
         state.loading = false;
         state.successMessage = action.payload?.message;
         state.seller = action.payload?.seller;
+      })
+      .addCase(create_stripe_connect_account.pending, (state) => {
+        state.loader = true;
+      })
+      .addCase(create_stripe_connect_account.rejected, (state, action) => {
+        state.loader = false;
+        state.errorMessage = action.payload?.message;
+      })
+      .addCase(create_stripe_connect_account.fulfilled, (state) => {
+        state.loader = false;
+      })
+
+      .addCase(active_stripe_connect_account.pending, (state) => {
+        state.loader = true;
+      })
+      .addCase(active_stripe_connect_account.rejected, (state, action) => {
+        state.loader = false;
+        state.errorMessage = action.payload?.message;
+      })
+      .addCase(active_stripe_connect_account.fulfilled, (state, action) => {
+        state.loader = false;
+        state.successMessage = action.payload?.message;
       })
   }
 })

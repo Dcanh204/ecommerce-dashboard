@@ -6,6 +6,7 @@ import Search from './../../components/Search';
 import { useDispatch, useSelector } from 'react-redux';
 import { get_seller_request } from '../../stores/Reducers/sellerReducer';
 import { ClipLoader } from 'react-spinners';
+import StatusBadge from '../../components/StatusBadge';
 const SellerRequest = () => {
   const dispatch = useDispatch();
   const { sellers, totalSellers, loading } = useSelector(state => state.seller);
@@ -66,7 +67,7 @@ const SellerRequest = () => {
                   <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{index + 1}</td>
                   <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{item?.name}</td>
                   <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{item?.email}</td>
-                  <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap capitalize '>{item?.payment}</td>
+                  <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap capitalize '><StatusBadge type="payment_account" status={item?.payment} /></td>
                   <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap capitalize'>{item?.status}</td>
                   <td scope='row' className='py-3 px-4 lg:px-8 font-medium whitespace-nowrap'>
                     <Link to={`/admin/dashboard/sellers/${item._id}`} className='inline-block p-[6px] bg-green-500 rounded-md hover:shadow-lg hover:bg-green-400/50 '><FaEye /></Link>

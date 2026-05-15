@@ -74,7 +74,7 @@ const DeactiveSellers = () => {
                   </td>
                   <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{item.name}</td>
                   <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{item.email}</td>
-                  <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{item.payment}</td>
+                  <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'><StatusBadge type="payment_account" status={item?.payment} /></td>
                   <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'><StatusBadge type="user" status={item.status} /></td>
                   <td scope='row' className='py-3 px-4 lg:px-8 font-medium whitespace-nowrap'>
                     <Link to={`/admin/dashboard/sellers/${item._id}`} className='inline-block p-[6px] bg-green-500 rounded-md hover:shadow-lg hover:bg-green-400/50 '><FaEye /></Link>

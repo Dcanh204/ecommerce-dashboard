@@ -7,10 +7,11 @@ import { FaEdit, FaTrash, FaEye } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteProduct, getProduct, messageClear } from '../../stores/Reducers/productReducer';
 import toast from 'react-hot-toast';
+import { ClipLoader } from 'react-spinners';
 const Product = () => {
 
   const dispatch = useDispatch();
-  const { products, totalProduct } = useSelector(state => state.product);
+  const { products, totalProduct, loading } = useSelector(state => state.product);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState(searchValue);
@@ -23,13 +24,14 @@ const Product = () => {
       setDebouncedSearch(searchValue)
     }, 500)
     return () => clearTimeout(handler)
-  })
+  }, [searchValue])
   // lấy danh sách sản phẩm
   useEffect(() => {
     const obj = {
       parPage,
       page: currentPage,
-      searchValue: debouncedSearch
+      searchValue: debouncedSearch,
+      discount: false
     }
     dispatch(getProduct(obj))
   }, [debouncedSearch, parPage, currentPage, dispatch])
@@ -76,7 +78,15 @@ const Product = () => {
               </tr>
             </thead>
             <tbody>
-              {products?.map((item, index) =>
+              {loading ? (
+                <tr>
+                  <td colSpan="9" className="py-10">
+                    <div className="flex justify-center items-center w-full">
+                      <ClipLoader color="#d0d2d6" />
+                    </div>
+                  </td>
+                </tr>
+              ) : (products?.map((item, index) =>
                 <tr key={item._id}>
                   <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{index + 1}</td>
                   <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>
@@ -96,7 +106,7 @@ const Product = () => {
                     <Link onClick={() => handlerDelete(item._id)} className='inline-block justify-start  items-center p-[6px] bg-red-500 rounded-md hover:shadow-lg hover:bg-red-500/50 '><FaTrash /></Link>
                   </td>
                 </tr>
-              )}
+              ))}
             </tbody>
           </table>
         </div>

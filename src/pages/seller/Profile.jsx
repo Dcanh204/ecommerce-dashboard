@@ -5,9 +5,12 @@ import { FaEdit, FaEyeSlash, FaEye } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
 import { messageClear, profile_image_upload, profile_info_add } from '../../stores/Reducers/authReducer';
 import toast from 'react-hot-toast';
+import StatusBadge from '../../components/StatusBadge';
+import { create_stripe_connect_account } from '../../stores/reducers/sellerReducer';
 const Profile = () => {
   const dispatch = useDispatch();
   const { userInfo, loadingProfile, successMessage, errorMessage } = useSelector(state => state.auth);
+  const { loader } = useSelector(state => state.seller);
   const [show, setShow] = useState(false);
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
@@ -52,6 +55,13 @@ const Profile = () => {
 
   return (
     <div className='px-2 lg:px-7 pt-5'>
+      {
+        loader && (
+          <div className='fixed w-full h-full left-0 top-0 bg-[#0000007a] z-[9999] flex justify-center items-center'>
+            <FadeLoader color="white" />
+          </div>
+        )
+      }
       <div className='w-full flex flex-wrap'>
         <div className='w-full lg:w-6/12'>
           <div className='w-full p-4 bg-[#6a5fdf] rounded-md text-[#d0d2d6]'>
@@ -97,12 +107,12 @@ const Profile = () => {
                 </div>
                 <div className='flex gap-3'>
                   <span className='font-bold'>Trạng thái: </span>
-                  <span>{userInfo.status}</span>
+                  <StatusBadge type="user" status={userInfo.status} />
                 </div>
                 <div className='flex gap-3'>
                   <span className='font-bold'>Tài khoản thanh toán: </span>
                   {
-                    userInfo.status === 'active' ? <span className='bg-red-500 text-white cursor-pointer  px-2  rounded-md'>{userInfo.payment}</span> : <span className='bg-blue-500 text-white cursor-pointer  px-2 rounded-md'>Kích hoạt ngay</span>
+                    userInfo.payment === 'active' ? <StatusBadge type="payment_account" status={userInfo.payment} /> : <span onClick={() => dispatch(create_stripe_connect_account())} className='bg-blue-500 text-white cursor-pointer text-[10px]  px-2 py-1 rounded'>Kích hoạt</span>
                   }
                 </div>
               </div>

@@ -75,7 +75,7 @@ const SellerDetails = () => {
                 </div>
                 <div className='flex gap-2  text-black'>
                   <span className='font-bold'>Trạng thái thanh toán: </span>
-                  <span className='capitalize'>{seller?.payment}</span>
+                  <span className='capitalize'><StatusBadge type="payment_account" status={seller?.payment} /></span>
                 </div>
               </div>
             </div>

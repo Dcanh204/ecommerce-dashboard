@@ -3,9 +3,9 @@ import { api } from "../../api/api";
 
 export const getProduct = createAsyncThunk(
   'product/getProduct',
-  async ({ page, searchValue, parPage }, { rejectWithValue }) => {
+  async ({ page, searchValue, parPage, discount }, { rejectWithValue }) => {
     try {
-      const { data } = await api.get(`/products?page=${page}&searchValue=${searchValue}&parPage=${parPage}`, { withCredentials: true })
+      const { data } = await api.get(`/products?page=${page}&searchValue=${searchValue}&parPage=${parPage}&discount=${discount ? 'true' : ''}`, { withCredentials: true })
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -112,9 +112,16 @@ const productReducer = createSlice({
         state.errorMessage = action.payload?.message;
       })
 
+      .addCase(getProduct.pending, (state) => {
+        state.loading = true;
+      })
       .addCase(getProduct.fulfilled, (state, action) => {
+        state.loading = false;
         state.products = action.payload?.products;
         state.totalProduct = action.payload?.totalProduct
+      })
+      .addCase(getProduct.rejected, (state) => {
+        state.loading = false;
       })
 
       .addCase(getProductById.fulfilled, (state, action) => {
